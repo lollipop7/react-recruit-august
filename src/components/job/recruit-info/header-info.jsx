@@ -107,7 +107,7 @@ class HeaderInfoComponent extends Component {
             this.props.getEvaluation({evaluationId:evaluationId})
         }
         //显示评估表
-        this.props.showEvaluationModal();  
+        this.props.showEvaluationModal();
     }
     showBackgroundModal = () => {
         this.props.showBackgroundModal()
@@ -133,7 +133,7 @@ class HeaderInfoComponent extends Component {
                 workyears, //工作年限
                 educationbg, //学历
                 channel, // 简历来源
-            } = resumeInfo;   
+            } = resumeInfo;
             const stage = find(stagesMap,item=>{
                 return item.iscurrentstage === '1';
             })
@@ -141,9 +141,9 @@ class HeaderInfoComponent extends Component {
             <div className="header-info">
                 <div>
                     <div className="inline-block">
-                        <img 
-                            src={headimg && headimg !== '' ? headimg : "./static/images/head.jpg"} 
-                            alt="默认头像" 
+                        <img
+                            src={headimg && headimg !== '' ? headimg : "./static/images/head.jpg"}
+                            alt="默认头像"
                             onError={this.imgOnError}
                         />
                     </div>
@@ -165,11 +165,14 @@ class HeaderInfoComponent extends Component {
                                     }}>{email}</span>
                                 </div>
                                 <div className="pull-right noprint">
+                                    <Button className="watch-invitaion-button" size="small">
+                                        查看AI沟通记录
+                                    </Button>
                                     {
-                                        stage!=undefined && stage.stageid>=5 && 
-                                                    <Button 
-                                                        type="primary" 
-                                                        onClick={this.showBackgroundModal} 
+                                        stage!=undefined && stage.stageid>=5 &&
+                                                    <Button
+                                                        type="primary"
+                                                        onClick={this.showBackgroundModal}
                                                     >
                                                         背调TA
                                                     </Button>
@@ -180,12 +183,12 @@ class HeaderInfoComponent extends Component {
                                     <Button type="primary" onClick={this.printResume} >
                                         打印简历
                                     </Button>
-                                    
-                                    <Button className="share" 
-                                        onClick={this.handleShare} 
+
+                                    <Button className="share"
+                                        onClick={this.handleShare}
                                         style={{position: "relative",top:-2}}
                                     >
-                                        <img 
+                                        <img
                                             style = {{
                                                 width: 40,
                                                 height: 40
@@ -227,12 +230,12 @@ class HeaderInfoComponent extends Component {
                             <div className="table-cell" style={{width:120,height:48,position:"relative",top:-7}} >
                                 <span style={{lineHeight:"48px"}}>同时申请职位 :</span>
                             </div>
-                            <div className="table-cell"  
+                            <div className="table-cell"
                                 style={{
                                         width:"750px",
                                         overflow:"auto"
                                 }}>
-                                <ul className="inline-block" 
+                                <ul className="inline-block"
                                     style={{
                                         listStyleType: 'none',
                                         height:"100%",
@@ -246,10 +249,10 @@ class HeaderInfoComponent extends Component {
                                             return (
                                                 <li key={index} className="inline-block">
                                                     &nbsp;{index+1}.{item.positionname}
-                                                    (<a 
-                                                        href="javascript:;" 
+                                                    (<a
+                                                        href="javascript:;"
                                                         onClick={
-                                                            positionid === currentPId ? 
+                                                            positionid === currentPId ?
                                                             () => {} :
                                                             ()=>this.props.getStageLog({
                                                                 positionId: positionid,
@@ -257,7 +260,7 @@ class HeaderInfoComponent extends Component {
                                                             })
                                                         }
                                                         style={{
-                                                            color: '#898989',   
+                                                            color: '#898989',
                                                             textDecoration: 'underline'
                                                         }}
                                                     >{stagename}</a>)
@@ -270,7 +273,7 @@ class HeaderInfoComponent extends Component {
                                 </ul>
                             </div>
                             <div className="table-cell">
-                                <div 
+                                <div
                                     className="noprint"
                                     style={{cursor:"pointer"}}
                                     onClick={this.changeStage}
@@ -284,31 +287,34 @@ class HeaderInfoComponent extends Component {
                                 <span>标签 :</span>
                             </div>
                             <div className="table-cell tags">
-                                <EditableTagGroup data={stagesMap}/> 
+                                <EditableTagGroup data={stagesMap}/>
+                            </div>
+                            <div className="table-cell">
+                              <Button className="cele-intent-button">候选人意向</Button>
                             </div>
                         </div>
                         <div className="table">
                             <div className="table-cell">
-                                <span>面试评估表 :</span> 
+                                <span>面试评估表 :</span>
                             </div>
                             <div className="table-cell assess">
                                 <Button
                                     style={{
-                                        width: 102, 
+                                        width: 102,
                                         borderColor: '#b6b6b6',
                                         fontWeight:'bold',
                                         color:((evaluationId!=undefined && evaluationId.length!=0))?'#28ad78':'#b6b6b6'
                                     }}
                                     onClick={this.handleEvaluate}
                                     disabled={stage!=undefined && stage.stageid>2?false:true}
-                                >   
+                                >
                                         <img className="as"
                                         style={{
                                             width: 16,
                                             height: 22,
                                         }}
                                         src={
-                                           (evaluationId!=undefined && evaluationId.length!=0)?"./static/images/resume/as-table.png":"./static/images/resume/as.png"} 
+                                           (evaluationId!=undefined && evaluationId.length!=0)?"./static/images/resume/as-table.png":"./static/images/resume/as.png"}
                                             alt="面试评估表"/>
                                     {(evaluationId!=undefined && evaluationId.length!=0)?"已添加":'点此添加'}
                                 </Button>
@@ -316,7 +322,7 @@ class HeaderInfoComponent extends Component {
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         );
     }

@@ -16,14 +16,14 @@ export const requireAuthHook = (nextState,replace) => {
     // 修改网页title
     const {routes} = nextState,
     title = routes[routes.length - 1 ].breadcrumbName;
-    document.title = `51云招聘 - ${title ? title : routes[routes.length - 2 ].breadcrumbName}`;  
+    document.title = `51云招聘 - ${title ? title : routes[routes.length - 2 ].breadcrumbName}`;
 }
 
 export const requireHook = (nextState,replace) => {
     // 修改网页title
     const {routes} = nextState,
     title = routes[routes.length - 1 ].breadcrumbName;
-    document.title = `51云招聘 - ${title ? title : routes[routes.length - 2 ].breadcrumbName}`;  
+    document.title = `51云招聘 - ${title ? title : routes[routes.length - 2 ].breadcrumbName}`;
 }
 
 // 离开页面触发此钩子

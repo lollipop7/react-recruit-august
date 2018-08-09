@@ -1,4 +1,4 @@
-import React, {Component,PropTypes} from 'react';
+import React, {Component} from 'react';
 import { Button} from 'antd'
 
 import ScrollPageContent from 'components/scroll-page-content';
@@ -7,19 +7,11 @@ import BreadCrumbComponent from 'components/breadcrumb';
 import LeftNavComponent from 'components/manager/left-nav';
 
 export default class ManagerPage extends Component {
-    static contextTypes = {
-        router: PropTypes.object
-    }
 
     componentDidMount(){
         NProgress.done();
     }
 
-    goHome = () => {
-        //NProgress.start();
-        this.context.router.push('/');
-    }
-    
     render() {
         const {location,routes} = this.props,
             pathname = location.pathname,
@@ -35,9 +27,9 @@ export default class ManagerPage extends Component {
                         <div className="pull-right">
                             {this.props.children}
                         </div>
-                    </div>    
+                    </div>
                 </div>
             </ScrollPageContent>
         );
-    }    
+    }
 }

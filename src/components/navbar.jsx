@@ -84,7 +84,7 @@ class NavBarComponents extends Component {
 
     handleKeyUp = event => {
         if(event.keyCode === 13){
-            this.searchKeyword();            
+            this.searchKeyword();
         }
     }
 
@@ -117,6 +117,7 @@ class NavBarComponents extends Component {
                 {name: '任务报表',path:'/task'},
                 {name: '员工管理',path:'/manager'},
                 {name: '简历搜索',path:'searchResume'},
+                {name: '智能HR',path:'/intellHR'},
                 {name: '薪酬数据',path:'/salaryQuery'},
             ];
         return (
@@ -135,8 +136,8 @@ class NavBarComponents extends Component {
                             navData.map((item,index)=>{
                                 const {path,name} = item;
                                 return (
-                                    <li 
-                                        key={index} 
+                                    <li
+                                        key={index}
                                         style={{
                                             backgroundColor: pathname.indexOf(path) !== -1 ? '#00699f' : ''
                                         }}
@@ -151,9 +152,9 @@ class NavBarComponents extends Component {
                         {!isLoading &&
                             <div className="table">
                                 <div className="table-row">
-                                    <div 
-                                        className="email-address dropdown-wrapper" 
-                                        onMouseLeave={this.hideSettings} 
+                                    <div
+                                        className="email-address dropdown-wrapper"
+                                        onMouseLeave={this.hideSettings}
                                         onMouseOver={this.showSettings}
                                     >
                                         {username}
@@ -199,9 +200,9 @@ class NavBarComponents extends Component {
                             </div>
                         }
                     </div>
-                    <Link 
-                        to="/email" 
-                        className={`email ${pathname==='/email' ? 'active' : ''}`} 
+                    <Link
+                        to="/email"
+                        className={`email ${pathname==='/email' ? 'active' : ''}`}
                         onClick={()=>this.showNprogress()}
                     >
                         <img src={`${prefix}email.png`} alt="邮箱" />

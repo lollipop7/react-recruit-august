@@ -52,6 +52,12 @@
                 }
             }
         }
+        .watch-invitaion-button {
+          height: 30px;
+          color: #3F51B5;
+          font-size: 14px;
+          border-color: #3F51B5;
+        }
         button {
             width: 114px;
             height: 40px;
@@ -82,7 +88,7 @@
                 &:first-child {
                     span{
                         color: $theme-font-color;
-                    } 
+                    }
                     &+div {
                         min-width: 766px;
                     }
@@ -121,7 +127,14 @@
                             border-color: #b6b6b6 !important;
                         }
                     }
-                    
+
+                }
+                .cele-intent-button {
+                  margin-left: 16px;
+                  height: 30px;
+                  color: #3F51B5;
+                  font-size: 14px;
+                  border-color: #3F51B5;
                 }
             }
             ul {
@@ -173,8 +186,8 @@
                 }
             }
         }
-        .boder-right-none {
-            border-right: none;
+        .boder-left-none {
+            border-left: none; 
         }
     }
     // 信息主体

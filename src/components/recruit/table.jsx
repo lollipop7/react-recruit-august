@@ -44,10 +44,10 @@ class TableComponents extends Component {
                         {trim(text)}
                     </a>
         }
-        columns[columns.length-2].render = (text,record,index)=>{
+        columns[columns.length-3].render = (text,record,index)=>{
             return <span title={moment(text).format("YYYY-MM-DD")}>{moment(text).format("YYYY-MM-DD")}</span>;
         }
-        columns[columns.length-1].render = (text,record,index)=>{
+        columns[columns.length-2].render = (text,record,index)=>{
             return <span className="prestatusname-manage">{text?text:"无"}</span>;
         }
         return columns;

@@ -27,7 +27,7 @@ const NewJob = {
         require.ensure([], (require) => {
             cb(null, require('pages/create-job').default)
         }, 'NewJobPage')
-    } 
+    }
 }
 
 // 引入职位管理路由组件
@@ -46,13 +46,13 @@ const Job = {
         require.ensure([], (require) => {
             cb(null, require('pages/job').default)
         }, 'JobPage')
-    } 
+    }
 }
 
 // 引入招聘流程路由组件
 const Recruit = {
     path: 'recruit(/:stageid)',
-    breadcrumbName:"招聘流程", 
+    breadcrumbName:"招聘流程",
     onEnter:requireAuthHook,
     onLeave:onLeavePage,
     getComponent(nextState,cb){
@@ -65,7 +65,7 @@ const Recruit = {
 // 引入招聘详情页面路由组件
 const resumeInfo = {
     path: 'resumeInfo(/:resumeId)(/:logId)', // resumeId:职位id logId:流程id
-    // breadcrumbName:"招聘流程", 
+    // breadcrumbName:"招聘流程",
     onEnter:requireAuthHook,
     // onLeave:onLeavePage,
     getComponent(nextState,cb){
@@ -122,7 +122,7 @@ const Login = {
     getComponent:(nextState,cb)=>{
         require.ensure([], (require) => {
             cb(null, require('pages/login').default)
-        }, 'LoginPage') 
+        }, 'LoginPage')
     }
 }
 
@@ -149,7 +149,7 @@ const SettingEmail = {
         require.ensure([], (require) => {
             cb(null, require('pages/setting-email').default)
         }, 'SettingEmailPage')
-    } 
+    }
 }
 
 // 引入404页面路由
@@ -160,7 +160,7 @@ const NotFoundPage = {
         require.ensure([], (require) => {
             cb(null, require('pages/404').default)
         }, 'NotFoundPage')
-    } 
+    }
 }
 
 //员工管理页面子路由
@@ -183,7 +183,7 @@ const ClerkDetail = {
         require.ensure([], (require) => {
             cb(null, require('components/manager/clerk/clerk-detail').default)
         }, 'ClerkDetailPage')
-    } 
+    }
 }
 
 //添加员工页面路由
@@ -195,7 +195,7 @@ const NewClerkForm = {
         require.ensure([], (require) => {
             cb(null, require('components/manager/clerk/new-clerk-form').default)
         }, 'NewClerkForm')
-    } 
+    }
 }
 
 // 引入员工简历页面路由组件
@@ -218,7 +218,7 @@ const Crchives = {
         require.ensure([], (require) => {
             cb(null, require('components/manager/archives').default)
         }, 'ArchivesPage')
-    } 
+    }
 }
 
 //组织架构页面子路由
@@ -230,7 +230,7 @@ const Organize = {
         require.ensure([], (require) => {
             cb(null, require('components/manager/organize').default)
         }, 'OrganizePage')
-    } 
+    }
 }
 
 //全员状况页面子路由
@@ -242,7 +242,7 @@ const Condition = {
         require.ensure([], (require) => {
             cb(null, require('components/manager/condition').default)
         }, 'ConditionPage')
-    } 
+    }
 }
 
 //人事动态页面子路由
@@ -254,7 +254,7 @@ const Dynamics = {
         require.ensure([], (require) => {
             cb(null, require('components/manager/dynamics').default)
         }, 'DynamicsPage')
-    } 
+    }
 }
 
 // 引入员工管理页面路由
@@ -300,7 +300,7 @@ const UseObject = {
         require.ensure([], (require) => {
             cb(null, require('components/help/useObject').default)
         }, 'UseObject')
-    } 
+    }
 }
 //引入使用帮助页面登录界面子路由
 const LogPage = {
@@ -311,7 +311,7 @@ const LogPage = {
         require.ensure([], (require) => {
             cb(null, require('components/help/logPage').default)
         }, 'LogPage')
-    } 
+    }
 }
 //引入使用帮助页面主界面子路由
 const MainPage = {
@@ -322,7 +322,7 @@ const MainPage = {
         require.ensure([], (require) => {
             cb(null, require('components/help/mainPage').default)
         }, 'MainPage')
-    } 
+    }
 }
 //引入使用帮助页面职位管理界面子路由
 const ResumePage = {
@@ -333,7 +333,7 @@ const ResumePage = {
         require.ensure([], (require) => {
             cb(null, require('components/help/resumePage').default)
         }, 'ResumePage')
-    } 
+    }
 }
 //引入使用帮助页面招聘流程界面子路由
 const RecrtPage = {
@@ -344,7 +344,7 @@ const RecrtPage = {
         require.ensure([], (require) => {
             cb(null, require('components/help/recrtPage').default)
         }, 'RecrtPage')
-    } 
+    }
 }
 //引入使用帮助页面人才库界面子路由
 const TlentPage = {
@@ -355,7 +355,7 @@ const TlentPage = {
         require.ensure([], (require) => {
             cb(null, require('components/help/tlentPage').default)
         }, 'TlentPage')
-    } 
+    }
 }
 //引入使用帮助页面任务报表界面子路由
 const TskPage = {
@@ -366,7 +366,7 @@ const TskPage = {
         require.ensure([], (require) => {
             cb(null, require('components/help/tskPage').default)
         }, 'TskPage')
-    } 
+    }
 }
 //引入使用帮助页面员工管理界面子路由
 const ManagePage = {
@@ -377,7 +377,7 @@ const ManagePage = {
         require.ensure([], (require) => {
             cb(null, require('components/help/managePage').default)
         }, 'ManagePage')
-    } 
+    }
 }
 //引入使用帮助页面常见问题界面子路由
 const Questions = {
@@ -388,7 +388,7 @@ const Questions = {
         require.ensure([], (require) => {
             cb(null, require('components/help/questions').default)
         }, 'Questions')
-    } 
+    }
 }
 //引入使用帮助页面说明界面子路由
 const Explain = {
@@ -399,7 +399,7 @@ const Explain = {
         require.ensure([], (require) => {
             cb(null, require('components/help/explain').default)
         }, 'Explain')
-    } 
+    }
 }
 // 引入使用帮助页面路由
 const HelpPage = {
@@ -474,7 +474,7 @@ const QueryResume = {
         require.ensure([], (require) => {
             cb(null, require('components/resumeSearch/searchResume').default)
         }, 'QueryResume')
-    } 
+    }
 }
 //我的下载页面
 const DownloadResume = {
@@ -485,7 +485,7 @@ const DownloadResume = {
         require.ensure([], (require) => {
             cb(null, require('components/resumeSearch/downloadResume').default)
         }, 'DownloadResume')
-    } 
+    }
 }
 //我的收藏页面
 const CollectResume = {
@@ -496,7 +496,7 @@ const CollectResume = {
         require.ensure([], (require) => {
             cb(null, require('components/resumeSearch/collectResume').default)
         }, 'CollectResume')
-    } 
+    }
 }
 // 简历搜索页面路由
 const SearchResumePage = {
@@ -537,6 +537,71 @@ const ResumeDetail = {
     }
 }
 
+// 智能hr-意向沟通
+const IntentComm = {
+    onEnter: requireAuthHook,
+    onLeave: onLeavePage,
+    getComponent(nextState, cb){
+        require.ensure([], (require)=>{
+            cb(null, require('components/intellHR/intent-comm').default)
+        }, 'IntentCommPage')
+    }
+}
+
+// 智能hr-自动面试邀约
+const InterviewInvitate = {
+    onEnter: requireAuthHook,
+    onLeave: onLeavePage,
+    getComponent(nextState, cb){
+        require.ensure([], (require)=>{
+            cb(null, require('components/intellHR/interview-invitate').default)
+        }, 'InterviewInvitatePage')
+    }
+}
+
+// 统计分析
+const StatisAnaly = {
+    onEnter: requireAuthHook,
+    onLeave: onLeavePage,
+    getComponent(nextState, cb){
+        require.ensure([], (require)=>{
+            cb(null, require('components/intellHR/statis-analy').default)
+        }, 'StatisAnalyPage')
+    }
+}
+
+// 设置智能HR
+const TosetIntellHR = {
+    onEnter: requireAuthHook,
+    onLeave: onLeavePage,
+    getComponent(nextState, cb){
+        require.ensure([], (require)=>{
+            cb(null, require('components/intellHR/toset-intellHR').default)
+        }, 'TosetIntellHRPage')
+    }
+}
+//
+const IntellHR = {
+  path: 'intellHR',
+  breadcrumbName: '智能HR',
+  indexRoute: IntentComm,
+  getChildRoutes(partialNextState, cb){
+    require.ensure([], (require) => {
+      cb(null, [
+        IntentComm,
+        InterviewInvitate,
+        StatisAnaly,
+        TosetIntellHR
+      ])
+    })
+  },
+  getComponent(nextState, cb){
+    require.ensure([], (require) => {
+      cb(null, require('pages/intell-hr').default)
+    }, 'IntellHRPage')
+  }
+}
+
 /*路由配置*/
 const RouteConfig = {
   childRoutes: [ {
@@ -550,7 +615,7 @@ const RouteConfig = {
             require.ensure([], (require) => {
                 cb(null, require('pages/index').default)
             }, 'IndexPage')
-        } 
+        }
     },
     childRoutes: [
             Job, // 职位
@@ -571,7 +636,8 @@ const RouteConfig = {
             CaseView,//背调案例
             ResumeDetail,
             SalaryQuery,
-            NotFoundPage// 404
+            NotFoundPage,// 404
+            IntellHR  //智能HR
         ]
   } ]
 }

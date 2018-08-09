@@ -53,6 +53,7 @@ const NOCOLLECT = {type:types.NOCOLLECT}
     }
     //查询简历详情
     export const searchResumeDetail = (data) => (dispatch,getState) => {
+        console.log(data)
         //NProgress.start();
         dispatch({...VIEW_DETAILS_START})
         axios({

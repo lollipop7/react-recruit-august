@@ -13,6 +13,7 @@ import ShareModalComponents from 'components/resume-info/share-modal';
 import EvaluationModalComponents from 'components/resume-info/interview-evaluation-modal';
 import BackgroundSurveyModalComponents from 'components/resume-info/background-survey';
 import ShareEvaluationModalComponents from 'components/resume-info/share-evaluationModal';
+import CommLog from 'components/intellHR/comm-log';
 
 // 富文本编辑器
 import EmailEditorComponents from 'components/email/right';
@@ -26,7 +27,7 @@ import * as Actions from 'actions';
 class ResumeInfoPage extends Component {
 
     state = {
-        type: 0,
+        type: 3,
         time:"",//当前流程约定时间
         stage:"",//当前流程
         thelable:"",//标签
@@ -134,13 +135,13 @@ class ResumeInfoPage extends Component {
                                 <ul className="table tabs-container">
                                     <li className="table-cell empty"></li>
                                     <li 
-                                        className={`tab-item table-cell boder-right-none ${type==0 ? 'active' : ''}`}
+                                        className={`tab-item table-cell ${type==0 ? 'active' : ''}`}
                                         onClick={() => this.handleChangeType(0)}
                                     >
                                         个人简历
                                     </li>
                                     <li 
-                                        className={`tab-item table-cell ${type==1 ? 'active' : ''}`}
+                                        className={`tab-item table-cell boder-left-none ${type==1 ? 'active' : ''}`}
                                         onClick={() => this.handleChangeType(1)}
                                     >
                                     <Tooltip title={<span onClick={this.clickLookEmail}>邮件已发送！</span>}>
@@ -153,11 +154,17 @@ class ResumeInfoPage extends Component {
                                         邮件
                                     </li>
                                     {staged!=undefined && staged.stageid>=3 && <li 
-                                        className={`tab-item table-cell ${type==2 ? 'active' : ''}`}
+                                        className={`tab-item table-cell boder-left-none ${type==2 ? 'active' : ''}`}
                                         onClick={() => this.handleChangeType(2)}
                                     >
                                         行业薪资
                                     </li>}
+                                    <li 
+                                        className={`tab-item table-cell boder-left-none ${type==3 ? 'active' : ''}`}
+                                        onClick={() => this.handleChangeType(3)}
+                                    >
+                                        AI通话记录
+                                    </li>
                                     <li className="table-cell empty"></li>
                                 </ul>
                             }
@@ -168,7 +175,7 @@ class ResumeInfoPage extends Component {
                                     <MainContentComponent data={data} />
                                 </div>
                                 {isRecruit &&
-                                    <div className={`email-content ${type==1 ? '' : 'none'}`}>
+                                    <div className={`${type==1 ? '' : 'none'}`}>
                                         <EmailEditorComponents
                                             addressee={{
                                                 resumeid,
@@ -181,8 +188,13 @@ class ResumeInfoPage extends Component {
                                     </div>
                                 }
                                 {isRecruit &&
-                                    <div className={`email-content ${type==2 ? '' : 'none'}`}>
+                                    <div className={`${type==2 ? '' : 'none'}`}>
                                         <SearchSalaryComponent/>
+                                    </div>
+                                }
+                                {isRecruit &&
+                                    <div className={`comm-content box-border ${type==3 ? '' : 'none'}`}>
+                                        <CommLog/>
                                     </div>
                                 }
                             </div> 

@@ -1,0 +1,213 @@
+.comm-content {
+    width: 850px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.comm-log {
+    position: relative;
+    width: 100%;
+    float: left;
+    background: #ebebeb;
+    .base-slider-wrap {
+        width: 100%;
+        position: relative;
+        right:  64%;
+        float: left;
+        background: #fff;    
+    } 
+    .base-slider,
+    .base-slider-extra {
+        position: relative;
+        float: left;
+        left: 64%;
+    }
+    .base-slider {
+        width: 36%;
+    }
+    .base-slider-extra {
+        width: 64%;
+        background-color: #ebebeb;     
+    }
+    .customer-info {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #ebebeb;
+    }
+    .ant-avatar {
+        display: inline-block;
+        text-align: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        color: #fff;
+        vertical-align: middle;
+        font-size: 18px;
+        line-height: 40px;
+        background: #60B8E4;
+    }
+    .customer-detail {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .name {
+            font-size: 16px;
+            color: #333;
+        }
+        .mobile {
+            color: #a0a0a0;
+        }
+    }
+    .intent-log {
+        padding: 20px;
+    }
+    .follow-card-wrap {
+        padding-top: 20px;
+        .follow-card {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #d8d8d8;
+            background: #fafafa;
+            border-radius: 8px;
+            cursor: pointer;
+            &.follow-card-active {
+                border-color: #6B40BE;
+            }
+            li:first-child {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-bottom: 10px;
+                span:first-child {
+                    color: #333;
+                }
+                span:nth-child(2) {
+                    font-size: 12px;
+                    color: #a0a0a0;
+                }
+            }
+            li:nth-child(2) {
+                padding-bottom: 16px;
+                color: #EF4B2B;
+            }
+            li:nth-child(3) {
+                text-align: right;
+                font-size: 12px;
+                color: #a0a0a0;
+            }
+        }
+    }
+    .customer-detail-call-log {
+        margin-left: 10px;
+        background: #fff;  
+    }
+    .call-log-header {
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #ebebeb;
+        h5 {
+            font-size: 14px;
+            color: #333;
+        }
+        .call-log-id {
+            margin-left: 14px;
+            text-transform: uppercase;
+            font-size:12px;
+            color: #a0a0a0;
+        }
+        .component-base-icon {
+            width: 12px;
+            height: 12px;
+            background: url(/static/images/intellHR/icon-close.png);
+        }
+    }
+    .calllog-switch {
+        margin: 18px 0 40px;
+        padding: 0 20px;
+    }
+    audio {
+        height: 50px;
+        width: 100%;
+    }
+    .conversation {
+        height: 400px;
+    }
+    .session-wrapper {
+        padding: 0 20px;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .session-item {
+        margin-bottom: 20px;
+        .session-item-info {
+            display: flex;
+
+            &.session-item-right {
+                flex-direction: row-reverse;
+            }
+        }
+        .ant-popover {
+            position: relative;
+            max-width:80%;
+            &.reveiver {
+                cursor: pointer;
+                max-width: 45%;
+            }
+            .ant-popover-content {
+                padding: 10px 20px;
+                line-height: 20px;
+                color: #333;
+                word-wrap: break-word;
+                word-break: break-all;
+                background: #efefef;
+                border-radius: 20px;
+            }
+            &.ant-popover-placement-left {
+                padding-left: 8px;
+                .ant-popover-content {
+                    border-top-left-radius: 0px;
+                }
+            }
+            &.ant-popover-placement-right {
+                padding-right: 8px;
+                .ant-popover-content {
+                    border-top-right-radius: 0px;
+                    box-shadow: 0 0 0 transparent;
+                    transition: all .5s ease-in-out;
+                    &:hover {
+                        box-shadow: 0 1px 6px rgba(0,0,0,.2);
+                    }
+                }
+            }
+        }
+        
+
+    }
+    .edit-user-level {
+        padding: 20px;
+        border-top: 1px solid #ebebeb;
+    }
+    .call-log-tags {
+        margin-bottom: 10px;
+        span {
+            display: inline-block;
+            border: 1px solid #6B40BE;
+            color: #6B40BE;
+            line-height: 30px;
+            padding: 5px 25px;
+            margin-right: 10px;
+            border-radius: 8px;
+        }
+    }
+    .call-log-info {
+        margin-bottom: 10px;
+        color: #656565;
+    }
+    .call-log-respond {
+        color: #EF4B2B;
+    }
+}

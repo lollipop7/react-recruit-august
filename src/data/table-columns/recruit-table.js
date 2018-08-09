@@ -18,13 +18,13 @@ module.exports = [
         "width": 132,
         //render: renderWithATag
     },
-    {
-        "title": "部门",
-        "dataIndex": "department", 
-        "key": "department",
-        "width": 80,
-        //render: renderWithATag
-    },
+    // {
+    //     "title": "部门",
+    //     "dataIndex": "department", 
+    //     "key": "department",
+    //     "width": 80,
+    //     //render: renderWithATag
+    // },
     {
         "title": "工作年限",
         "dataIndex": "workyears",
@@ -38,12 +38,12 @@ module.exports = [
         "key": "telephone",
         "width": 113
     },
-    {
-        "title": "邮箱",
-        "dataIndex": "email",
-        "key": "email",
-        "width": 129
-    },
+    // {
+    //     "title": "邮箱",
+    //     "dataIndex": "email",
+    //     "key": "email",
+    //     "width": 129
+    // },
     {
         "title": "居住地",
         "dataIndex": "livecityid",
@@ -61,5 +61,9 @@ module.exports = [
         "title": "状态",
         "dataIndex": "prestatusname",
         "key": "prestatusname"
+    },{
+        "title": "AI沟通状态",
+        "dataIndex": "AIinvitationstatus",
+        "key": "AIinvitationstatus"
     }
 ]
