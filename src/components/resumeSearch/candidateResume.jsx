@@ -14,6 +14,7 @@ export default class CandidateResumePage extends Component {
     //加密参数
     sorKey = () => {
         const {companyname} = this.props.userInfo;
+        
         //加密关键字
         const key = "%!##@$%|$#$%(^)$}$*{^*+%";
         //请求参数       
@@ -61,6 +62,7 @@ export default class CandidateResumePage extends Component {
             //this.props.collectResume({resumeId:"3926440",sorKey})
             this.props.collectResume({resumeId:`${resumeId}`,sorKey})
         } 
+        console.log('collectResume')
     }
     render() {
 

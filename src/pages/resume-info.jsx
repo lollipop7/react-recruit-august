@@ -102,7 +102,7 @@ class ResumeInfoPage extends Component {
             isTalent = this.isInTalentPage(location.pathname),
             isRecruit = this.isInRecruitPage(location.pathname),
             {resumeid,currentPId,resumeInfo={},evaluationId,lastStageLog,stagesMap} = data,
-            {username,email} = resumeInfo; 
+            {username,email,telephone} = resumeInfo; 
         const staged = find(stagesMap,item=>{
                 return item.iscurrentstage === '1'
             });
@@ -194,7 +194,10 @@ class ResumeInfoPage extends Component {
                                 }
                                 {isRecruit &&
                                     <div className={`comm-content box-border ${type==3 ? '' : 'none'}`}>
-                                        <CommLog/>
+                                        <CommLog customerdetail={{
+                                            username,
+                                            telephone
+                                        }}/>
                                     </div>
                                 }
                             </div> 

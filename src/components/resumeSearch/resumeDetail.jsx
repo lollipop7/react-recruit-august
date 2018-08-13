@@ -6,6 +6,10 @@ const SubMenu = Menu.SubMenu;
 const Option = Select.Option;
 
 export default class ResumeDetailPage extends Component {
+
+    componentWillReceiveProps(nextProps){
+        this.node.scrollIntoView();
+    }
     //加密参数
     sorKey = () => {
         const {companyname} = this.props.userInfo;
@@ -65,7 +69,7 @@ export default class ResumeDetailPage extends Component {
     render() {
         const {path,resumeData=[],totalHits,location} = this.props;
         return (
-            <div className="resumeDetail">
+            <div className="resumeDetail" ref = {node => this.node = node}>
                 {resumeData.length!=0 ? resumeData.map((item,index)=>{
                     return(
                     <div className="detail-item">

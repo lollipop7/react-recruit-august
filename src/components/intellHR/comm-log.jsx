@@ -5,23 +5,25 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as Actions from 'actions';
 
-export class CommLog extends Component {
+export default class CommLog extends Component {
     state = {
         _selectedIndex: 0,
     }
     render(){
-        const {_selectedIndex} = this.state;
+        const {_selectedIndex} = this.state,
+         {customerdetail} = this.props,
+         {username, telephone} = customerdetail;
         return (
             <div className="comm-log">
                 <div className="base-slider-wrap">
                     <div className="base-slider">
                         <div className="customer-info">
                             <span className="ant-avatar  ant-avatar-icon">
-                                {"郭"}
+                                {username ? username.slice(0, 1) : ''}
                             </span>
                             <div className="customer-detail">
-                                <p className="name">{"郭炜康"}</p>
-                                <p className="mobile">{"18616764388"}</p>
+                                <p className="name">{username}</p>
+                                <p className="mobile">{telephone}</p>
                             </div>
                         </div>
                         <div className="intent-log">
@@ -92,7 +94,7 @@ export class CommLog extends Component {
                                             <div className="session-item">
                                                 <div className="session-item-info session-item-right">
                                                     <span className="ant-avatar ant-avatar-icon">
-                                                        <i className="anticon">{"郭"}</i>
+                                                        <i className="anticon">{username ? username.slice(0, 1) : ''}</i>
                                                     </span>
                                                     <div className="receiver ant-popover ant-popover-placement-right">
                                                         <div className="ant-popover-content">
@@ -123,7 +125,7 @@ export class CommLog extends Component {
                                             <div className="session-item">
                                                 <div className="session-item-info session-item-right">
                                                     <span className="ant-avatar ant-avatar-icon">
-                                                        <i className="anticon">{"郭"}</i>
+                                                        <i className="anticon">{username ? username.slice(0, 1) : ''}</i>
                                                     </span>
                                                     <div className="receiver ant-popover ant-popover-placement-right">
                                                         <div className="ant-popover-content">
@@ -154,7 +156,7 @@ export class CommLog extends Component {
                                             <div className="session-item">
                                                 <div className="session-item-info session-item-right">
                                                     <span className="ant-avatar ant-avatar-icon">
-                                                        <i className="anticon">{"郭"}</i>
+                                                        <i className="anticon">{username ? username.slice(0, 1) : ''}</i>
                                                     </span>
                                                     <div className="receiver ant-popover ant-popover-placement-right">
                                                         <div className="ant-popover-content">
@@ -198,7 +200,7 @@ export class CommLog extends Component {
                                             <div className="session-item">
                                                 <div className="session-item-info session-item-right">
                                                     <span className="ant-avatar ant-avatar-icon">
-                                                        <i className="anticon">{"郭"}</i>
+                                                        <i className="anticon">{username ? username.slice(0, 1) : ''}</i>
                                                     </span>
                                                     <div className="receiver ant-popover ant-popover-placement-right">
                                                         <div className="ant-popover-content">
@@ -248,12 +250,3 @@ export class CommLog extends Component {
         )
     }
 }
-const mapStateToProps = state => {
-
-}
-
-const mapDispatchToProps = dispatch => {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CommLog)

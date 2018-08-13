@@ -17,7 +17,7 @@ import * as Actions from 'actions';
 class SearchResumePage extends Component {
     state = {
         switchContent:"简",
-        detail:true,
+        detail:false,
         isCheckResume:false,
         isCandidateResume:false,
         startState:true,

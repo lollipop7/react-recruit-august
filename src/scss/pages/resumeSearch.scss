@@ -16,8 +16,21 @@
     word-break:break-all;
     word-wrap: break-word
 }
+.wrap-box {
+    overflow: hidden;
+    width: 100%;
+    .wrap-left {
+        float: left;
+        position: relative;
+        right: 970px;
+        background:white;
+    }
+}
 .resumeSearch{
-    height: 820px;
+    float: left;
+    position: relative;
+    left: 970px;
+    min-height: 820px;
     ul{
         a{
             text-decoration:none;
@@ -40,7 +53,9 @@
 }
 
 .resumeSearchContent{
-    width:970px;
+    position: relative;
+    left: 1000px;
+    width: 970px;
     background:white;
     overflow:hidden;
     //简历搜索页面

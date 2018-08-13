@@ -166,7 +166,7 @@ class HeaderInfoComponent extends Component {
                                 </div>
                                 <div className="pull-right noprint">
                                     <Button className="watch-invitaion-button" size="small">
-                                        查看AI沟通记录
+                                        AI求职意向查询
                                     </Button>
                                     {
                                         stage!=undefined && stage.stageid>=5 &&
@@ -289,12 +289,9 @@ class HeaderInfoComponent extends Component {
                             <div className="table-cell tags">
                                 <EditableTagGroup data={stagesMap}/>
                             </div>
-                            <div className="table-cell">
-                              <Button className="cele-intent-button">候选人意向</Button>
-                            </div>
                         </div>
                         <div className="table">
-                            <div className="table-cell">
+                            <div className="table-cell" style={{width:120,height:48,position:"relative"}} >
                                 <span>面试评估表 :</span>
                             </div>
                             <div className="table-cell assess">
@@ -318,6 +315,10 @@ class HeaderInfoComponent extends Component {
                                             alt="面试评估表"/>
                                     {(evaluationId!=undefined && evaluationId.length!=0)?"已添加":'点此添加'}
                                 </Button>
+                            </div>
+                            <div className="table-cell">
+                              <span>AI沟通结果 :</span>
+                              <Button className="cele-intent-button">候选人有意向</Button>
                             </div>
                         </div>
                     </div>
