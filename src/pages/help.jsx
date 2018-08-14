@@ -8,19 +8,10 @@ import LeftNavComponent from 'components/help/left-menu';
 import BreadCrumbComponent from 'components/breadcrumb';
 
 export default class HelpPage extends Component {
-
-    static contextTypes = {
-        router: PropTypes.object
-    }
-
     componentDidMount(){
         NProgress.done();
     }
 
-    goHome = () => {
-        NProgress.start();
-        this.context.router.push('/');
-    }
     render() {
         const {location,routes} = this.props;
         return (

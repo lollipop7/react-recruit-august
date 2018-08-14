@@ -1,0 +1,60 @@
+.intell-hr {
+    position: relative;
+    right: 1100px;
+    width: 100%;
+    float: left;
+    background: #fff;
+    .left-nav {
+        float: left;
+        position: relative;
+        left: 1100px;
+        width: 100px;
+        padding-top: 45px;
+        a {
+            font-size: 12px;
+            color: #656565;
+            &:hover {
+                // color: #6b40be;
+            }
+        }
+        li {
+            display: flex;
+            flex-direction: column;
+            height: 100px;
+            align-items: center;
+            &.active {
+                color: #6b40be;
+            }
+            img {
+                height: 40px;
+                width: 40px;
+            }
+            p {
+                line-height: 20px;
+            }
+        }
+    }
+    .intell-right {
+        float: left;
+        position: relative;
+        padding: 20px;
+        left: 1120px;
+        width: 1078px;
+        background-color: #fff;
+        min-height: 896px;        
+    }
+
+    // 右侧面板
+    .intell-top {
+        position: relative;
+        .boxes {
+            display: flex;
+        }
+        .float-button {
+            button {
+                background-size: 26px 26px;
+                background-image: url(/static/images/plus.png);
+            }
+        }
+    }
+}

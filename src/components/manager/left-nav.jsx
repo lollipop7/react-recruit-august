@@ -38,19 +38,19 @@ export default class LeftNavComponent extends Component {
                         this.navData.map((item,index)=>{
                             const {path,name} = item;
                             return (
-                                <Link 
+                                <Link
                                     to={path}
                                 >
-                                    <li 
+                                    <li
                                         key={index}
-                                        className={pathname === item.path ? 'active': ''}
+                                        className={pathname === path ? 'active': ''}
                                         style={{
-                                            backgroundImage: 
-                                            `url(static/images/manager/${pathname === item.path ? `active-` : ``}img-0${index+1}.png)` 
+                                            backgroundImage:
+                                            `url(static/images/manager/${pathname === path ? `active-` : ``}img-0${index+1}.png)`
                                         }}
                                         onClick={()=>this.handleClick(index,path)}
                                     >
-                                        {item.name} 
+                                        {name} 
                                     </li>
                                 </Link>
                             )

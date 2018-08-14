@@ -550,6 +550,7 @@ const IntentComm = {
 
 // 智能hr-自动面试邀约
 const InterviewInvitate = {
+    path: 'interview-invitate',
     onEnter: requireAuthHook,
     onLeave: onLeavePage,
     getComponent(nextState, cb){
@@ -561,6 +562,7 @@ const InterviewInvitate = {
 
 // 统计分析
 const StatisAnaly = {
+    path: 'statis-analy',
     onEnter: requireAuthHook,
     onLeave: onLeavePage,
     getComponent(nextState, cb){
@@ -572,6 +574,7 @@ const StatisAnaly = {
 
 // 设置智能HR
 const TosetIntellHR = {
+    path: 'toset-intellHR',
     onEnter: requireAuthHook,
     onLeave: onLeavePage,
     getComponent(nextState, cb){
@@ -633,11 +636,11 @@ const RouteConfig = {
             ShowResume ,//分享简历页面
             Evaluation,//分享面试评估表页面
             SearchResumePage,//简历搜索页面
+            IntellHR,  //智能HR
             CaseView,//背调案例
             ResumeDetail,
             SalaryQuery,
             NotFoundPage,// 404
-            IntellHR  //智能HR
         ]
   } ]
 }

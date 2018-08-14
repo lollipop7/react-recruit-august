@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ScrollPageContent from 'components/scroll-page-content';
-import LeftNavComponent from 'components/resumeSearch/left-nav';
+import LeftNavComponent from 'components/intellHR/left-nav';
 import BreadCrumbComponent from 'components/breadcrumb';
 
 export default class IntellHRPage extends Component {
@@ -8,21 +8,18 @@ export default class IntellHRPage extends Component {
       NProgress.done();
     }
     render(){
-        console.log(this.props);
-        const {location, routes} = this.props,
-        {pathname} = location,
-        patternIntellHR = /\/intellHR/i;
+        const {location, routes} = this.props;
+
         return (
             <ScrollPageContent>
-              <div className="page-content intell-hr">
+              <div className="page-content">
                 <BreadCrumbComponent routes={routes}/>
-                <div className="box-border list-block">
-                    <div className="pull-left">
-                       {patternIntellHR.test(pathname)&&<LeftNavComponent location={location}/>} 
-                    </div>
-                    <div className="pull-right">
+                <div className="box-border wrap-box">
+                    <div className="intell-hr">
+                        <LeftNavComponent location={location}/>
+                        <div className="intell-right">
                         {this.props.children}
-
+                        </div>
                     </div>
                 </div>
               </div>

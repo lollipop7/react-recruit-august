@@ -116,7 +116,7 @@ class NavBarComponents extends Component {
                 {name: '人才库',path:'/talent'},
                 {name: '任务报表',path:'/task'},
                 {name: '员工管理',path:'/manager'},
-                {name: '简历搜索',path:'searchResume'},
+                {name: '简历搜索',path:'/searchResume'},
                 {name: '智能HR',path:'/intellHR'},
                 {name: '薪酬数据',path:'/salaryQuery'},
             ];
