@@ -1,5 +1,5 @@
 import React , {Component}from 'react';
-import { Progress , Table , Select , Button , notification } from 'antd';
+import { Progress, Select , Button , notification } from 'antd';
 import archivesData from 'data/select/archives';
 import archivesLeave from 'data/select/archivesLeave'
 
