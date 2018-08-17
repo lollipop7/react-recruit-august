@@ -165,9 +165,6 @@ class HeaderInfoComponent extends Component {
                                     }}>{email}</span>
                                 </div>
                                 <div className="pull-right noprint">
-                                    <Button className="watch-invitaion-button" size="small">
-                                        AI求职意向查询
-                                    </Button>
                                     {
                                         stage!=undefined && stage.stageid>=5 &&
                                                     <Button
@@ -232,14 +229,12 @@ class HeaderInfoComponent extends Component {
                             </div>
                             <div className="table-cell"
                                 style={{
-                                        width:"750px",
                                         overflow:"auto"
                                 }}>
                                 <ul className="inline-block"
                                     style={{
                                         listStyleType: 'none',
                                         height:"100%",
-                                        width:"750px",
                                         overflow:"auto"
                                     }}
                                 >
@@ -272,13 +267,19 @@ class HeaderInfoComponent extends Component {
                                     }
                                 </ul>
                             </div>
-                            <div className="table-cell">
-                                <div
-                                    className="noprint"
-                                    style={{cursor:"pointer"}}
-                                    onClick={this.changeStage}
-                                >
-                                    <img  src="./static/images/resume/right-arrow.png" alt="more"/>
+                            <div className='intell-opt'>
+                                <Button className="watch-invitaion-button">
+                                AI意向沟通
+                                </Button>
+                                <Button className="next-btn">
+                                操作
+                                </Button>
+                                {/* <div> 
+                                <img  src="./static/images/resume/right-arrow.png" alt="more"/>
+                                </div> */}
+                                <div className="comm-result">
+                                    <span>AI邀约结果：沟通中...</span>
+                                    <Icon type="sync"/>
                                 </div>
                             </div>
                         </div>
