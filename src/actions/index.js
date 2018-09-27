@@ -12,6 +12,7 @@ import * as FileActions from './file';
 import * as ManageActions from './manage';
 import * as SearchActions from './resumeSearch';
 import * as SalaryActions from './salaryReport';
+import * as IntellHRActions from './intellHR';
 
 module.exports =  {
     loginActions,
@@ -27,5 +28,6 @@ module.exports =  {
     FileActions,
     ManageActions,
     SearchActions,
-    SalaryActions
+    SalaryActions,
+    IntellHRActions
 }

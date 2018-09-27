@@ -103,4 +103,77 @@
             }
         }
     }
+    // tabs
+    .intell-tabs {
+        .table {
+            overflow: hidden;
+            height: 40px;
+            margin: 32px 0 20px 0;
+            li {
+                height: 40px;
+                border-bottom: 1px solid #d5d5d5;
+                &.tab-item {
+                    width: 100px;
+                    vertical-align: middle;
+                    text-align: center;
+                    transition: background-color 0.5s linear;
+                    &:hover {
+                        cursor: pointer;
+                        background-color: #efefef;
+                    }
+                    &.active {
+                        border-bottom: 2px solid #0086c9;
+                    }
+                }
+                &.ctr-btns {
+                    width: 840px;
+                    text-align: right;
+                }
+            }
+        }
+        .main-content {
+            .opts-group {
+                position: relative;
+            }
+            .ant-select {
+                font-size: 14px !important;
+            }
+            .ant-select-selection {
+                height: 30px !important;
+            }
+            .ant-select-selection__rendered {
+                line-height: 30px !important;
+                margin-left: 20px !important
+            }
+            .ant-select-selection__placeholder {
+                color: #656565;
+            }
+            .ant-input-affix-wrapper {
+                .ant-input-prefix {
+                    left: 20px;
+                }
+                .ant-input {
+                    width: 260px !important;
+                    height: 30px;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    color: #bbb;
+                    background-color: #fff;
+                    border: 1px solid #c1c1c1;
+                    &:not(:first-child) {
+                        padding-left: 44px;
+                    }
+                }
+            }
+            // table
+            .ant-table-wrapper {
+                margin-top: 20px;
+            }
+            .ant-table-wrapper .ant-table-thead > tr > th:first-child,
+            .ant-table-wrapper .ant-table-tbody > tr > td:first-child {
+                padding-left: 20px;
+            }
+            
+        }
+    }
 }

@@ -1,7 +1,7 @@
 import * as types from 'constants/recruit';
 import {AjaxByToken,cancelRequestByKey} from 'utils/ajax';
 
-import {notification} from 'antd'; 
+import {notification} from 'antd';
 
 let defaultData = {};
 

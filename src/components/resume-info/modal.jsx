@@ -76,6 +76,7 @@ class ModalComponents extends Component {
             formData = this.refs.modal.getFormData();
         if(!formData) return ;
         this.props.changeStageStatus({...formData,stageid,id},this.props);
+        console.log({...formData,stageid,id},this.props)
     }
 
     render() {

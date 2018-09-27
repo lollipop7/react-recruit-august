@@ -31,7 +31,8 @@ module.exports = {
       // '/resumeClient': {target:'http://hunter.51jrq.com'},
       // '/hrmanage': {target:'http://yun.51jrq.com'},
        '/hrmanage': {target:'http://192.168.1.251:66'},
-       '/resumeClient': {target:'http://192.168.1.251:8088'}
+       '/resumeClient': {target:'http://192.168.1.251:8088'},
+       '/robotagent': {target: 'http://192.168.1.251:66'},
       //'/resumeClient': {target:'http://51jrq-servers2:8088'}
     },
     // proxyTable: {

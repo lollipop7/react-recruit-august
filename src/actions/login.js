@@ -26,7 +26,6 @@ export const userLogin = (userInfo={},context) => (dispatch,getState) => {
         store.set('token',data);
         context.router.push('/');
     },err=>{
-        console.log(err);
         dispatch(LOGIN_DONE);
     });
 }

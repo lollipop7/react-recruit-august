@@ -20,6 +20,7 @@ import Promise from 'promise-polyfill';
 // window.resumeUrl = '/resumeClient/api';
 window.prefixUri = '/hrmanage/api/web'; //测试环境
 window.resumeUrl = '/resumeClient/api'; //请求接口前缀
+window.robotUri = '/robotagent/api/robot'; //请求智能hr
 // css文件
 import 'rc-steps/assets/index.css';
 import 'static/css/normalize.css';

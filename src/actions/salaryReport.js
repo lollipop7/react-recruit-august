@@ -1,5 +1,5 @@
 import * as types from 'constants/salaryReport';
-import {AjaxByToken,cancelRequestByKey,AjaxByGetByResumeClient} from 'utils/ajax';
+import {AjaxByToken,cancelRequestByKey} from 'utils/ajax';
 import axios from 'axios';
 
 // 获取查询条件

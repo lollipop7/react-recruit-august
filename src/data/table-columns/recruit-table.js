@@ -62,7 +62,7 @@ module.exports = [
         "dataIndex": "prestatusname",
         "key": "prestatusname"
     },{
-        "title": "AI沟通状态",
+        "title": "AI电话",
         "dataIndex": "AIinvitationstatus",
         "key": "AIinvitationstatus"
     }

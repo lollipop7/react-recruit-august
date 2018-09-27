@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Steps,{Step} from 'rc-steps';
 import { Tooltip } from 'antd';
-import moment from 'moment'
+
 
 // lodash
 import find from 'lodash/find';
@@ -76,13 +76,11 @@ export default class StepsComponent extends Component {
                     steps[item.stageid-1].status = 'finish';
                 }  
             });
-
             if(currentStage.stageid>3){
                 steps[currentStage.stageid-2].status = 'process';
             }else{
                 steps[currentStage.stageid-1].status = 'process';
             }
-
             for (let i=0;i<stagesMapArr.length;i++){
                 if (stagesMapArr[i].stageid==steps[i].icon){
                     steps[i].time=stagesMapArr[i].eventtime ? stagesMapArr[i].eventtime : stagesMapArr[i].deliverytime

@@ -27,11 +27,12 @@ import * as Actions from 'actions';
 class ResumeInfoPage extends Component {
 
     state = {
-        type: 3,
+        type: 0,
         time:"",//当前流程约定时间
         stage:"",//当前流程
         thelable:"",//标签
-        emailState:"none"
+        emailState:"none",
+        hasHisCall: true //是否沟通过
     }
     static contextTypes = {
         router: PropTypes.object
@@ -96,8 +97,8 @@ class ResumeInfoPage extends Component {
     };
 
     render() {
-        const {type , time , stage, thelable ,emailState} = this.state,
-            {isLoading,data,location,routeParams,getRecruitResumeInfo,uriParams} = this.props,      
+        const {type , time , stage, thelable ,emailState, hasHisCall} = this.state,
+            {isLoading,data,location,routeParams,getRecruitResumeInfo,uriParams, hasSingleCall, showCommLog} = this.props,      
             { logId } = routeParams,   
             isTalent = this.isInTalentPage(location.pathname),
             isRecruit = this.isInRecruitPage(location.pathname),
@@ -128,6 +129,7 @@ class ResumeInfoPage extends Component {
                             }
                             {isRecruit &&
                                 <HeaderInfoComponent 
+                                    handleChangeType = {this.handleChangeType}
                                     data={data}
                                 />
                             }
@@ -153,18 +155,20 @@ class ResumeInfoPage extends Component {
                                     </Tooltip> 
                                         邮件
                                     </li>
-                                    {staged!=undefined && staged.stageid>=3 && <li 
+                                    {staged!=undefined && staged.stageid>=3  && <li 
                                         className={`tab-item table-cell boder-left-none ${type==2 ? 'active' : ''}`}
                                         onClick={() => this.handleChangeType(2)}
                                     >
                                         行业薪资
                                     </li>}
-                                    <li 
-                                        className={`tab-item table-cell boder-left-none ${type==3 ? 'active' : ''}`}
-                                        onClick={() => this.handleChangeType(3)}
-                                    >
-                                        AI通话记录
-                                    </li>
+                                    {staged!=undefined && staged.stageid>1 && hasHisCall && showCommLog
+                                        &&<li 
+                                            className={`tab-item table-cell boder-left-none ${type==3 ? 'active' : ''}`}
+                                            onClick={() => this.handleChangeType(3)}
+                                        >
+                                            查看通话记录
+                                        </li>
+                                    }    
                                     <li className="table-cell empty"></li>
                                 </ul>
                             }
@@ -192,7 +196,7 @@ class ResumeInfoPage extends Component {
                                         <SearchSalaryComponent/>
                                     </div>
                                 }
-                                {isRecruit &&
+                                {isRecruit && staged!=undefined && staged.stageid>1 && hasHisCall && showCommLog &&
                                     <div className={`comm-content box-border ${type==3 ? '' : 'none'}`}>
                                         <CommLog customerdetail={{
                                             username,
@@ -231,13 +235,15 @@ const mapStateToProps = state => ({
     isLoading: state.Resume.isInfoLoading,
     //历史邮件
     historyEmail: state.Email.historyEmail,
+    hasSingleCall: state.IntellHR.hasSingleCall,
+    showCommLog: state.IntellHR.showCommLog,
 })
 const mapDispatchToProps = dispatch => ({
     getRecruitResumeInfo: bindActionCreators(Actions.ResumeActions.getRecruitResumeInfo, dispatch),
     getTalentResumeInfo: bindActionCreators(Actions.ResumeActions.getTalentResumeInfo, dispatch),
     getCrewList: bindActionCreators(Actions.ManageActions.getCrewList,dispatch),
     getEmailHistory: bindActionCreators(Actions.EmailActions.getEmailHistory, dispatch),
-    hideResumeModal: bindActionCreators(Actions.RecruitActions.hideResumeModal, dispatch) 
+    hideResumeModal: bindActionCreators(Actions.RecruitActions.hideResumeModal, dispatch),
 })
 
 export default connect(

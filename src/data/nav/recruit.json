@@ -1,18 +1,18 @@
 [
     {
-        "title": "职位申请",
+        "title": "简历初筛",
         "type": "1",
         "bgcolor": "#67d36b",
         "num": 0
     },
     {
-        "title": "预约管理",
+        "title": "面试邀约",
         "type": "2",
         "bgcolor": "#fbd03b",
         "num": 0
     },
     {
-        "title": "面试管理",
+        "title": "面试反馈",
         "type": "3",
         "bgcolor": "#ff960d",
         "num": 0

@@ -102,21 +102,20 @@
                     color: $theme-color;
                     border: 1px solid $theme-color;
                 }
-                &.assess {
-                    width: 110px;
-                    button {
-                        height: 30px;
-                        font-size: 14px;
-                        padding: 0 11px;
-                        margin-left: 0;
-                    }
+                .assess {
+                    margin-left: 10px;
                     span {
                         margin-left: 6px;
                     }
                     img{
                         vertical-align: middle;
                     }
-                    .ant-btn {
+                    &.ant-btn {
+                        height: 30px;
+                        font-size: 14px;
+                        padding: 0 10px;
+                        border-color: #b6b6b6;
+                        font-weight: bold;
                         &:focus {
                             //color: #b6b6b6 !important;
                             background-color: #FFF;
@@ -141,6 +140,7 @@
                 height: 35px;
             }
         }
+        // 招聘流程 AI意向沟通， 操作， AI邀约结果
         .intell-opt {
             position: absolute;
             top: 0;
@@ -150,6 +150,17 @@
                 height: 30px;
                 font-size: 14px;
                 text-align: center;
+            }
+            .comm-result {
+                margin-top: 22px;
+                padding-left: 16px;
+                color: #EF4B2B;
+            }
+            .reload-btn {
+                padding: 0 10px;
+                width: 70px;
+                height: 24px;
+                border-radius: 100px;
             }
         }
         .watch-invitaion-button {
@@ -162,6 +173,7 @@
         .next-btn {
             color: #0186c9;
             border-color: #0186c9;
+            cursor: pointer;
         }
         // 职位推荐按钮
         .ant-btn-orange {

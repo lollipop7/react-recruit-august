@@ -97,52 +97,72 @@ export const AjaxByPost = (uri, data) => {
             }
         })
     });
-    
 }
-export const AjaxGetByResumeClient = (uri, data) => {
-    return new Promise(function(resolve, reject) {
-        alert(`${resumeUrl}${uri}`);
-        axios({
-            url: `${resumeUrl}${uri}`,
-            method: 'get',
-            params: data,
-            header: {
-                contentType: 'application/json;charset=utf-8'
-            }
-        })
-        .then(response => {
-            alert(123123)
-            const {data} = response;
-            //console.log(JSON.parse(response) )
-            console.log(response)
-        })
-        .catch(function(response,e) {
-            // // console.log(response.config);
-            // if (response instanceof Error) {
-            //     // Something happened in setting up the request that triggered an Error
-            //     // console.log('Error', response.message);
-            //     reject(response);
-            //     // reject(response);
-            //     notification.error('网络错误',response.message);
-            // } else if(axios.isCancel(response)) {
-            //     // console.info(response.message);
-            // } else {
-            //     // The request was made, but the server responded with a status code
-            //     // that falls out of the range of 2xx
-            //     // console.log(response.data);
-            //     // console.log(response.status);
-            //     // console.log(response.headers);
-            //     // console.log(response.config);
-            // }
-        })
-    });
-    
-}
+
 export const AjaxByToken = (uri, data) => {
     // 获取本地存储的token
     const token = store.get('token');
     return AjaxByPost(uri, merge(data, { data: token }));
 }
-export const AjaxByGetByResumeClient = (uri, data) => {
-    return AjaxGetByResumeClient(uri, merge(data));
+
+export const AjaxByRobotPost = (uri, data) => {
+    return new Promise(function(resolve, reject) {
+        axios({
+            url: `${robotUri}/${uri}`,
+            method: 'post',
+            data: data,
+            header: {
+                contentType: 'application/json;charset=utf-8'
+            },
+            cancelToken: new CancelToken(function (c) {
+                cancel.push({
+                    [uri]: c
+                });
+            }),
+            transformResponse(data,b){
+                NProgress.done();
+                try{
+                    return JSON.parse(data);
+                }catch(err){
+                    // console.log(err);
+                }
+                
+            }
+        })
+        .then(response => {
+            const {data} = response;
+            const { returnCode, returnMsg } = data;
+            if (returnCode !== 'AAAAAAA') {
+                if(returnMsg === '登录已失效,请重新登录' && returnCode === '0000005'){
+                    cancelRequest();
+                    store.remove('token');
+                    location.href = `${location.origin}/#/login`;
+                }
+                // console.info(`${returnCode}:${returnMsg}`);
+                notification.error(returnMsg);
+                reject(response);
+            } else {
+                resolve(omit(data,['returnCode','returnMsg']));
+            }
+        })
+        .catch(function(response,e) {
+            // console.log(response.config);
+            if (response instanceof Error) {
+                // Something happened in setting up the request that triggered an Error
+                // console.log('Error', response.message);
+                reject(response);
+                // reject(response);
+                notification.error('网络错误',response.message);
+            } else if(axios.isCancel(response)) {
+                // console.info(response.message);
+            } else {
+                // The request was made, but the server responded with a status code
+                // that falls out of the range of 2xx
+                // console.log(response.data);
+                // console.log(response.status);
+                // console.log(response.headers);
+                // console.log(response.config);
+            }
+        })
+    });
 }

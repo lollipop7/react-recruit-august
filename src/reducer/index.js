@@ -12,6 +12,7 @@ import File from './file';
 import Manage from './manage';
 import ResumeSearch from './resumeSearch';
 import SalaryReport from './salaryReport';
+import IntellHR from './intellHR';
 
 const rootReducer = combineReducers({
     Login,
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
     File,
     Manage,
     ResumeSearch,
-    SalaryReport
+    SalaryReport,
+    IntellHR
 });
 
 export default rootReducer;

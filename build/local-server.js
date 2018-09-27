@@ -7,6 +7,7 @@ var proxyMiddleware = require('http-proxy-middleware')
 var proxyTable =  {
       '/hrmanage': {target:'http://192.168.1.251:66'},        //测试环境
       '/resumeClient': {target:'http://192.168.1.251:8088'},   //反向代理 映射
+      '/robotagent': {target: 'http://192.168.1.251:66'},
       // '/resumeClient': {target:'http://hunter.51jrq.com'},   
       // '/hrmanage': {target:'http://yun.51jrq.com'},
       //'/resumeClient': {target:'http://51jrq-servers2:8088'}

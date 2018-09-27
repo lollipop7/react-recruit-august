@@ -16,10 +16,6 @@ class HeaderInfoComponent extends Component {
 
     isSetTitle = false;
 
-    shouldComponentUpdate(nextProps,nextState) {
-        return nextProps !== this.props;
-    }
-
     componentWillUpdate(nextProps,nextState) {
         const {resumeInfo={}} = nextProps.data;
         // 设置简历页面的标题
@@ -112,9 +108,58 @@ class HeaderInfoComponent extends Component {
     showBackgroundModal = () => {
         this.props.showBackgroundModal()
     }
+    // 使用Promise封装setState
+    setStateAsync(state){
+        return new Promise((resolve)=>{
+            this.setState(state, resolve)
+        })
+    }
+    async handleRobotCall(){
+        const 
+        {data, historyEmail, triSingleCall} = this.props,
+        {   
+            resumeInfo={},
+            resumeid,
+        } = data,
+        {
+            username,
+            telephone,
+        } = resumeInfo;
+        
+        // "resumeid": "string,简历id",
+        // "mobile": "string,手机号",
+        // "userName": "string,用户名",
+        // "company_id": "integer,公司id",
+        // "robot_type": "integer,机器人类型；1-意向沟通机器人，2-面试邀约机器人"
+    
+        triSingleCall({
+            resumeid : resumeid,
+            robot_type: 1,
+            mobile: '18951317287',
+            userName: username,
+            company_id: '11'
+        })
+        
+        
+    }
+    handleReload = (stageid) => {
+        const {data, getPhoneLogInfoByRID , handleChangeType} = this.props,
+        {resumeid} = data;
+        new Promise(()=>{
+            getPhoneLogInfoByRID({
+            robot_type: 1,
+            resumeid: '1450001'
+            })
+        }).then(()=>{
+            if(stage){
+                stage.stageid>1 && handleChangeType(3)
+            }
+        })
+    }
+    
 
     render() {
-        const {data,modalVisible,currentStage,evaluation } = this.props,
+        const {data,modalVisible,currentStage,evaluation, hasSingleCall } = this.props,
             {
                 resumeInfo={},
                 resumeid, //简历id
@@ -268,23 +313,42 @@ class HeaderInfoComponent extends Component {
                                 </ul>
                             </div>
                             <div className='intell-opt'>
-                                <Button className="watch-invitaion-button">
-                                AI意向沟通
-                                </Button>
-                                <Button className="next-btn">
+                                {stage !== undefined && stage.stageid == 1 &&
+                                    <Button 
+                                        onClick={()=>this.handleRobotCall()}
+                                        className="watch-invitaion-button">
+                                    AI意向沟通
+                                    </Button>
+                                }
+                                {stage !== undefined && stage.stageid == 2 &&
+                                    <Button 
+                                        onClick={()=>this.handleRobotCall()}
+                                        className="watch-invitaion-button">
+                                    AI面试邀约
+                                    </Button>
+                                } 
+                                <Button className="next-btn"
+                                    onClick={this.changeStage}
+                                >
                                 操作
                                 </Button>
                                 {/* <div> 
                                 <img  src="./static/images/resume/right-arrow.png" alt="more"/>
                                 </div> */}
-                                <div className="comm-result">
-                                    <span>AI邀约结果：沟通中...</span>
-                                    <Icon type="sync"/>
-                                </div>
+                                {/* {hasSingleCall && */}
+                                    <div className="comm-result">
+                                        <span>AI邀约结果：沟通中...</span>
+                                        <Button 
+                                            className="reload-btn"
+                                            icon="reload" 
+                                            onClick={()=>this.handleReload(stage)}>刷新</Button>
+                                    </div>
+                                {/* } */}
+                                
                             </div>
                         </div>
                         <div className="table">
-                            <div className="table-cell">
+                            <div className="table-cell" style={{width: 50}}>
                                 <span>标签 :</span>
                             </div>
                             <div className="table-cell tags">
@@ -292,15 +356,11 @@ class HeaderInfoComponent extends Component {
                             </div>
                         </div>
                         <div className="table">
-                            <div className="table-cell" style={{width:120,height:48,position:"relative"}} >
+                            <div className="table-cell">
                                 <span>面试评估表 :</span>
-                            </div>
-                            <div className="table-cell assess">
                                 <Button
+                                    className='assess'
                                     style={{
-                                        width: 102,
-                                        borderColor: '#b6b6b6',
-                                        fontWeight:'bold',
                                         color:((evaluationId!=undefined && evaluationId.length!=0))?'#28ad78':'#b6b6b6'
                                     }}
                                     onClick={this.handleEvaluate}
@@ -317,10 +377,10 @@ class HeaderInfoComponent extends Component {
                                     {(evaluationId!=undefined && evaluationId.length!=0)?"已添加":'点此添加'}
                                 </Button>
                             </div>
-                            <div className="table-cell">
+                            {/* <div className="table-cell">
                               <span>AI沟通结果 :</span>
                               <Button className="cele-intent-button">候选人有意向</Button>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -333,6 +393,7 @@ class HeaderInfoComponent extends Component {
 const mapStateToProps = state => ({
     isDownLoading: state.Resume.isDownLoading,
     currentStage : state.Resume.currentStage,
+    hasSingleCall: state.IntellHR.hasSingleCall
 })
 const mapDispatchToProps = dispatch => ({
     downloadResume: bindActionCreators(Actions.ResumeActions.downloadResume, dispatch),
@@ -343,6 +404,8 @@ const mapDispatchToProps = dispatch => ({
     getEvaluation: bindActionCreators(Actions.ResumeActions.getEvaluation, dispatch),
     getResumeUrl: bindActionCreators(Actions.ResumeActions.getResumeUrl, dispatch),
     showBackgroundModal: bindActionCreators(Actions.ResumeActions.showBackgroundModal, dispatch),
+    triSingleCall: bindActionCreators(Actions.IntellHRActions.triSingleCall, dispatch),
+    getPhoneLogInfoByRID: bindActionCreators(Actions.IntellHRActions.getPhoneLogInfoByRID, dispatch)
 })
 
 export default connect(

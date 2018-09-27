@@ -152,6 +152,7 @@
         }
         .ant-popover {
             position: relative;
+            z-index: 1;
             max-width:80%;
             &.reveiver {
                 cursor: pointer;

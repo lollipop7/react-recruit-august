@@ -1,5 +1,5 @@
 import * as types from 'constants/resumeSearch';
-import {AjaxByToken,cancelRequestByKey,AjaxByGetByResumeClient} from 'utils/ajax';
+import {AjaxByToken,cancelRequestByKey} from 'utils/ajax';
 import axios from 'axios'
 
 import {notification,Modal,message} from 'antd'; 
