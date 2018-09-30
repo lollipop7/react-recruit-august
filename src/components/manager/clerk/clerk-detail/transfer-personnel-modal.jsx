@@ -212,6 +212,7 @@ export default class TransferPersonnelModal extends Component {
                 onCancel={hideTransferPersonnelModal}
                 onOk={this.handleMobilizeEmployee}
                 width={827}
+                maskClosable = {false}
             >
                 <ul>
                     <li>

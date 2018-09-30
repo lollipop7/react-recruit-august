@@ -40,7 +40,7 @@ class TableComponent extends Component {
             )
         }
 
-        columns[columns.length - 2].render = (text,record,index) => {
+        columns[columns.length - 1].render = (text,record,index) => {
             return (
                 <a onClick={()=>this.showResumeModal(record)} href="javascript:;" className="highlight-text">
                    {text}
@@ -48,25 +48,25 @@ class TableComponent extends Component {
             )
         }
 
-        columns[columns.length - 1].render = (text,record,index) => {
-            const {resumeid} = record;
-            return (
-                <a href="javascript:;">
-                    <img 
-                        src={`./static/images/talent/fav${parseInt(text) ? 1 : 2}.png`} 
-                        alt={parseInt(text) ? '收藏' : '未收藏'} 
-                        onClick={
-                            parseInt(text) ? ()=>cancelCollectionResume({resumeid}) : ()=>collectionResume({resumeid})
-                        }
-                        style={{
-                            height: 17,
-                            verticalAlign: 'middle',
-                            marginLeft: 7
-                        }}
-                    />
-                </a>
-            )
-        }
+        // columns[columns.length - 1].render = (text,record,index) => {
+        //     const {resumeid} = record;
+        //     return (
+        //         <a href="javascript:;">
+        //             <img 
+        //                 src={`./static/images/talent/fav${parseInt(text) ? 1 : 2}.png`} 
+        //                 alt={parseInt(text) ? '收藏' : '未收藏'} 
+        //                 onClick={
+        //                     parseInt(text) ? ()=>cancelCollectionResume({resumeid}) : ()=>collectionResume({resumeid})
+        //                 }
+        //                 style={{
+        //                     height: 17,
+        //                     verticalAlign: 'middle',
+        //                     marginLeft: 7
+        //                 }}
+        //             />
+        //         </a>
+        //     )
+        // }
         return columns;
     }
 

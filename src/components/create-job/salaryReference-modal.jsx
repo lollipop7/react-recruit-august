@@ -297,6 +297,7 @@ class SalaryModalComponent extends Component {
                 onCancel = {this.hideSalaryModal}
                 footer = {null}
                 width = {1000}
+                maskClosable = {false}
             >
             
                 <div  className="form" style={{margin:"0 auto",background:"#EBEBEB",paddingTop:20}}>

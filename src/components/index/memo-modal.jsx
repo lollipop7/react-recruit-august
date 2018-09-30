@@ -87,6 +87,7 @@ class MemoModalComponent extends Component {
                 width = {510}
                 okText = "添加"
                 onOk = {this.addMemoValue}
+                maskClosable = {false}
             >
                 <div className="memo-body">
                     {memoModalVisible?

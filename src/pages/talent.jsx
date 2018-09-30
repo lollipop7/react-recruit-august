@@ -13,6 +13,25 @@ import isEqual from 'lodash/isEqual';
 // nav data
 import navData from 'data/nav/talent';
 
+// {
+//     "all": {
+//         "title": "全部人才",
+//         "type": "all"
+//     }
+//     ,"onthjob": {
+//         "title": "在职人员",
+//         "type": "office"
+//     }
+//     ,"talents": {
+//         "title": "社会人才",
+//         "type": "social"
+//     }
+//     ,"collection": {
+//         "title": "收藏",
+//         "type": "collection"
+//     }
+// }
+
 // 招聘人员详细信息Modal页面
 import ResumeModalComponent from 'components/resume-modal';
 // 上传简历Modal

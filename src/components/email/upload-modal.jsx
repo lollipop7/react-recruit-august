@@ -72,6 +72,7 @@ class UploadModalComponent extends Component {
                     visible={modalVisible}
                     onCancel={this.props.hideUploadModal}
                     footer={null}
+                    maskClosable = {false}
                 >
                     <Upload 
                         name='uploadify'

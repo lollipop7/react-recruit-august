@@ -33,6 +33,7 @@ class SaveModalComponent extends Component {
                 onCancel = {this.backResumeManager}
                 onOk = {this.handleModal}
                 style = {{width:800,height:600}}
+                maskClosable = {false}
             >
                 <div className="tick-text" style={{textAlign: "center"}}>
                     <img src="./static/images/job/tick.png" alt="钩" className="tick"/>

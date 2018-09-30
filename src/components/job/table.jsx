@@ -284,6 +284,7 @@ class TableComponent extends Component {
                     onCancel={!isLoadingAbort ? () => hideJobModal() : () => {}}
                     width={1100}
                     footer={null}
+                    maskClosable = {false}
                 >
                     <JobInfoComponent
                         data={this.state.currentClickJob} 

@@ -73,6 +73,7 @@ import * as Actions from 'actions';
                         onCancel={this.handleCancel}
                         footer={null}
                         closable={false}
+                        maskClosable = {false}
                         >
                         <RightComponents addressee={this.state.addressee} />
                     </Modal>

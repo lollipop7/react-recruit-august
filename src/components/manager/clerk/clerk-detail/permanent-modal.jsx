@@ -160,6 +160,7 @@ export default class PermanentModal extends Component {
                 onCancel={hidePermanentModal}
                 onOk={this.handlePositiveEmployees}
                 width={827}
+                maskClosable = {false}
             >
                 <div className="base-info">
                 <ul>

@@ -90,6 +90,7 @@ class ModalComponents extends Component {
                 onOk={this.changeStageStatus}
                 onCancel={isLoading ? ()=>{} : this.props.hideModal}
                 confirmLoading={isLoading}
+                maskClosable = {false}
             >
                 {stageid === '1' && <ReplyComponents ref="modal" />}
                 {stageid === '2' && <SubscribeComponents ref="modal" currentStage={currentStage} />}

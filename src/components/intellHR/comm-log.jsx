@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Tooltip } from 'antd';
+import {Tooltip, notification } from 'antd';
 
 // lodash
 import find from 'lodash/find';
@@ -12,7 +12,23 @@ import * as Actions from 'actions';
 
 class CommLog extends Component {
     state = {
-        selectedIndex: 0,
+        selectedIndex: 1,
+        intentPhoneLog: {}, // 意向沟通 stageid = 1
+        invitePhoneLog: {}  // 面试邀约 stageid = 2
+    }
+
+    // componentDidMount(){
+    //     const {staged} = this.props;
+    //     if (staged.stageid < 3) {
+    //         this.setStateAsync({selectedIndex: staged.stageid})
+    //     }
+    // }
+
+    // 使用Promise封装setState
+    setStateAsync(state){
+        return new Promise((resolve)=>{
+            this.setState(state, resolve)
+        })
     }
 
     finish(status){
@@ -52,31 +68,36 @@ class CommLog extends Component {
     }
 
     handleChangeTab = (selectedIndex) => {
-        this.setState({selectedIndex}, ()=>{
-            // console.log(this.state.selectedIndex)
+        const {data, getPhoneLogInfoByRID, phoneLogInfo} = this.props,
+        {callLogsList} = phoneLogInfo,
+        {resumeid} = data;
+        
+        let currentPhoneLog = find(callLogsList, item => {
+            return item.callStatus === 2
+        })
+        this.setStateAsync({selectedIndex})
+        .then(()=>{
+            getPhoneLogInfoByRID({
+                robot_type: selectedIndex,
+                resumeid: resumeid  
+            })
         })
     }
 
     render(){
         const {selectedIndex} = this.state,
-         {customerdetail, phoneLogInfo} = this.props,
+         {customerdetail, phoneLogInfo, staged} = this.props,
          {username, telephone} = customerdetail;
          const {
              mobile, name,
              callLogsList
          } = phoneLogInfo;
-        const currentPhoneLog = find(callLogsList, item => {
-            return item.finishStatus === 0 && item.callStatus === 2
+         let currentPhoneLog = find(callLogsList, item => {
+            return item.callStatus === 2
         })
-        const invitePhoneLog = find(callLogsList, item => {
-            return item.finishStatus !== 0 && item.callStatus === 2
-        })
-        let {
-            phoneLog = {},
-            callInstanceId,
-            duration,
-            startTime
-        } = currentPhoneLog;
+        if(currentPhoneLog == undefined) {
+            notification.error({message:'未找到通话记录'});
+        }
         return (
             <div className="comm-log">
                 <div className="base-slider-wrap">
@@ -94,40 +115,41 @@ class CommLog extends Component {
                             <p style={{
                                 fontSize: "14px",
                                 color: "rgba(0,0,0,.45)"
-                            }}>共2条通话记录</p>
+                            }}>共{2}条通话记录</p>
                             <div className="follow-card-wrap">
-                                <div className={`follow-card ${selectedIndex==0 ? 'follow-card-active' : ''}`}
-                                    onClick={()=>this.handleChangeTab(0)}
-                                >
-                                    <ul>
-                                        <li>
-                                            <span>AI-面试邀约</span>
-                                            <span>通话时长：{this.formatSeconds(invitePhoneLog.duration)}</span>
-                                        </li>
-                                        <li>
-                                            {/* 已接通、未接通、空号 */}
-                                            {/* 已接通:（AI-面试邀约）：候选人接受了面试、候选人拒绝了面试、候选人意向模糊  */}
-                                            {this.finish(invitePhoneLog.finishStatus)}
-                                        </li>
-                                        <li>
-                                            {invitePhoneLog.startTime}
-                                        </li>
-                                    </ul>
-                                </div>
                                 <div className={`follow-card ${selectedIndex==1 ? 'follow-card-active' : ''}`}
                                     onClick={()=>this.handleChangeTab(1)}
                                 >
                                     <ul>
                                         <li>
+                                            {/* 在申请节点发起的，就是意向沟通，在邀约节点发起的，就是面试邀约 */}
+                                            <span>AI-面试邀约</span>
+                                            <span>通话时长：{this.formatSeconds(currentPhoneLog.duration)}</span>
+                                        </li>
+                                        <li>
+                                            {/* 已接通、未接通、空号 */}
+                                            {/* 已接通:（AI-面试邀约）：候选人接受了面试、候选人拒绝了面试、候选人意向模糊  */}
+                                            {this.finish(currentPhoneLog.finishStatus)}
+                                        </li>
+                                        <li>
+                                            {currentPhoneLog.startTime}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className={`follow-card ${selectedIndex==2 ? 'follow-card-active' : ''}`}
+                                    onClick={()=>this.handleChangeTab(2)}
+                                >
+                                    <ul>
+                                        <li>
                                             <span>AI-意向沟通</span>
-                                            <span>通话时长：{this.formatSeconds(duration)}</span>
+                                            <span>通话时长：{this.formatSeconds(currentPhoneLog.duration)}</span>
                                         </li>
                                         <li>
                                             {/* 已接通:（AI-意向沟通）：候选人有求职意向、候选人暂无求职意向、候选人意向模糊  */}
                                             {this.finish(currentPhoneLog.finishStatus)}
                                         </li>
                                         <li>
-                                            {startTime}
+                                            {currentPhoneLog.startTime}
                                         </li>
                                     </ul>
                                 </div>
@@ -135,21 +157,22 @@ class CommLog extends Component {
                         </div>
                     </div>
                     <div className="base-slider-extra">
+                        {
+                            currentPhoneLog &&
                             <div className="customer-detail-call-log">
                                 <div className="call-log-header">
-                                    <h5>通话记录<span className="call-log-id">id: {callInstanceId}</span></h5>
-                                    <div className="component-base-icon">
-                                    </div>
+                                    <h5>通话记录<span className="call-log-id">id: {currentPhoneLog.callInstanceId}</span></h5>
+                                    <div className="component-base-icon"></div>
                                 </div>
                                 <div className="calllog-switch">
-                                    <audio controls className="call-audio" src={phoneLog.luyinOssUrl}></audio>
+                                    <audio controls className="call-audio" src={currentPhoneLog.phoneLog.luyinOssUrl}></audio>
                                 </div>
                                 <div className="call-log-detail"> 
                                     <div className="conversation">
-                                        <audio src={phoneLog.luyinOssUrl}></audio>
+                                        <audio src={currentPhoneLog.phoneLog.luyinOssUrl}></audio>
                                         <div className="session-wrapper">
                                             {
-                                                phoneLog.phoneLogs.map((item, index)=>{
+                                                currentPhoneLog.phoneLog.phoneLogs.map((item, index)=>{
                                                     if(item.speaker == 'AI'){
                                                         return (
                                                             <div className="session-item" key={index}>
@@ -191,172 +214,20 @@ class CommLog extends Component {
                                                     }
                                                 })
                                             }
-                                            {/* <div className="session-item">
-                                                <div className="session-item-info session-item-left">
-                                                    <span className="ant-avatar ant-avatar-image">
-                                                        <img src="/static/images/intellHR/icon-AI.png"/>
-                                                    </span>
-                                                    <div className="ant-popover ant-popover-placement-left">
-                                                        <div className="ant-popover-content">
-                                                            <span>喂，您好</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="err-wrap"></div>
-                                                </div>
-                                            </div>
-                                            <div className="session-item">
-                                                <div className="session-item-info session-item-right">
-                                                    <span className="ant-avatar ant-avatar-icon">
-                                                        <i className="anticon">{username ? username.slice(0, 1) : ''}</i>
-                                                    </span>
-                                                    <div className="receiver ant-popover ant-popover-placement-right">
-                                                        <div className="ant-popover-content">
-                                                            <span>
-                                                                <i className="icon-yuyin"></i>
-                                                                嗯，你好，你哪里啊
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="err-wrap">
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="session-item">
-                                                <div className="session-item-info session-item-left">
-                                                    <span className="ant-avatar ant-avatar-image">
-                                                        <img src="/static/images/intellHR/icon-AI.png"/>
-                                                    </span>
-                                                    <div className="ant-popover ant-popover-placement-left">
-                                                        <div className="ant-popover-content">
-                                                            <span>你好，我是金融行业的猎头顾问，请问您最近有在看新的工作机会吗？</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="err-wrap"></div>
-                                                </div>
-                                            </div>
-                                            <div className="session-item">
-                                                <div className="session-item-info session-item-right">
-                                                    <span className="ant-avatar ant-avatar-icon">
-                                                        <i className="anticon">{username ? username.slice(0, 1) : ''}</i>
-                                                    </span>
-                                                    <div className="receiver ant-popover ant-popover-placement-right">
-                                                        <div className="ant-popover-content">
-                                                            <span>
-                                                                <i className="icon-yuyin"></i>
-                                                                嗯，我现在没有看啊
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="err-wrap">
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="session-item">
-                                                <div className="session-item-info session-item-left">
-                                                    <span className="ant-avatar ant-avatar-image">
-                                                        <img src="/static/images/intellHR/icon-AI.png"/>
-                                                    </span>
-                                                    <div className="ant-popover ant-popover-placement-left">
-                                                        <div className="ant-popover-content">
-                                                            <span>好的，稍后我们安排负责相应职位的资深顾问为您服务，您看可以吗？</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="err-wrap"></div>
-                                                </div>
-                                            </div>
-                                            <div className="session-item">
-                                                <div className="session-item-info session-item-right">
-                                                    <span className="ant-avatar ant-avatar-icon">
-                                                        <i className="anticon">{username ? username.slice(0, 1) : ''}</i>
-                                                    </span>
-                                                    <div className="receiver ant-popover ant-popover-placement-right">
-                                                        <div className="ant-popover-content">
-                                                            <span>
-                                                                <i className="icon-yuyin"></i>
-                                                                好的
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="err-wrap">
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="session-item">
-                                                <div className="session-item-info session-item-left">
-                                                    <span className="ant-avatar ant-avatar-image">
-                                                        <img src="/static/images/intellHR/icon-AI.png"/>
-                                                    </span>
-                                                    <div className="ant-popover ant-popover-placement-left">
-                                                        <div className="ant-popover-content">
-                                                            <span>嗯那就不打搅您了，祝您工作愉快，再见</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="err-wrap"></div>
-                                                </div>
-                                            </div>
-                                            <div className="session-item">
-                                                <div className="session-item-info session-item-left">
-                                                    <span className="ant-avatar ant-avatar-image">
-                                                        <img src="/static/images/intellHR/icon-AI.png"/>
-                                                    </span>
-                                                    <div className="ant-popover ant-popover-placement-left">
-                                                        <div className="ant-popover-content">
-                                                            <span>好的，稍后我们安排负责相应职位的资深顾问为您服务，您看可以吗？</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="err-wrap"></div>
-                                                </div>
-                                            </div>
-                                            <div className="session-item">
-                                                <div className="session-item-info session-item-right">
-                                                    <span className="ant-avatar ant-avatar-icon">
-                                                        <i className="anticon">{username ? username.slice(0, 1) : ''}</i>
-                                                    </span>
-                                                    <div className="receiver ant-popover ant-popover-placement-right">
-                                                        <div className="ant-popover-content">
-                                                            <span>
-                                                                <i className="icon-yuyin"></i>
-                                                                好的
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="err-wrap">
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="session-item">
-                                                <div className="session-item-info session-item-left">
-                                                    <span className="ant-avatar ant-avatar-image">
-                                                        <img src="/static/images/intellHR/icon-AI.png"/>
-                                                    </span>
-                                                    <div className="ant-popover ant-popover-placement-left">
-                                                        <div className="ant-popover-content">
-                                                            <span>嗯那就不打搅您了，祝您工作愉快，再见</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="err-wrap"></div>
-                                                </div>
-                                            </div> */}
                                         </div>
                                     </div>
                                 </div>
                                 <div className="edit-user-level">
                                     <div className="call-log-tags">
-                                        <span>通话时长{duration}秒</span><span>对话{phoneLog.phoneLogs.length}轮</span>
+                                        <span>通话时长{currentPhoneLog.duration}秒</span><span>对话{currentPhoneLog.phoneLog.phoneLogs.length}轮</span>
                                     </div>
                                     <div className="call-log-info">
                                         <span>任务类型：AI-求职意向沟通</span>
                                     </div>
-                                    {/* <div className="call-log-respond">
-                                        <span>意向结果：候选人有求职意向</span>
-                                    </div> */}
+                                    
                                 </div>
                             </div> 
-            
+                        }    
                     </div>
                 </div>
             </div>
@@ -370,7 +241,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-
+    getPhoneLogInfoByRID: bindActionCreators(Actions.IntellHRActions.getPhoneLogInfoByRID, dispatch)
 })
 
 export default connect(

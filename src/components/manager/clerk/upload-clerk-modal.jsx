@@ -120,6 +120,7 @@ export default class UploadClerkModal extends Component {
                 visible={visible}
                 onCancel={isLoading ? () => {} : hideUploadClerkModal}
                 footer={null}
+                maskClosable = {false}
             >
                 <Dragger
                     name='uploadify'

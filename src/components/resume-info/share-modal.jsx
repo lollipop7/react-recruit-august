@@ -67,6 +67,7 @@ class ShareModalComponents extends Component {
                 className = "shareModal"
                 footer = {null}
                 onCancel={isLoading ? ()=>{} : this.props.hideShareModal}
+                maskClosable = {false}
                 >
                 <p className="title">{`分享简历  ${username}--${currentPName}`}</p>
                 <p className="content">分享后，可以查看到该简历的详细信息</p>

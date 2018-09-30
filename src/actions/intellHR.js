@@ -1,5 +1,6 @@
 import * as types from 'constants/intellHR';
 import {AjaxByRobotPost, cancelRequestByKey} from 'utils/ajax';
+import {notification} from 'antd';
 // TODO: 智能机器人
 // TODO: 查看通话记录
 
@@ -14,6 +15,7 @@ export const triSingleCall = (data) => (dispatch, getState) => {
     .then(res=>{
         dispatch({...SINGLECALL, singleCallData: res})
     }, err=>{
+        notification.error({message:err.data.returnMsg});
     });
 }
 
@@ -23,6 +25,6 @@ export const getPhoneLogInfoByRID = (data) => (dispatch, getState) => {
     .then(res=>{
         dispatch({...PHONELOGINFO, phoneLogInfo: res})
     }, err=>{
-        console.log(err)
+        notification.error({message:err.data.returnMsg});
     })
 }

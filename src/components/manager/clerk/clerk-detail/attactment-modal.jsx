@@ -174,6 +174,7 @@ export default class PlusAttachmentModal extends Component {
             visible={visible}
             onCancel={this.hideAttachmentModal}
             onOk= {this.UploadMaterial}
+            maskClosable = {false}
         >
                 {name=='身份证原件' ? 
                     <div>

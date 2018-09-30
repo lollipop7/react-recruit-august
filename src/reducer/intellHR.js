@@ -6,7 +6,7 @@ import {
 const initialState = {
     hasSingleCall: false,
     singleCallData: [],
-    showCommLog: false,
+    isShowCommLog: false,
     phoneLogInfo: []
 }
 
@@ -15,7 +15,7 @@ export default function intellhr(state = initialState, actions){
         case SINGLECALL:
             return {...state, singleCallData: actions.singleCallData, hasSingleCall: true};
         case PHONELOGINFO:
-            return {...state, phoneLogInfo: actions.phoneLogInfo, showCommLog: true};
+            return {...state, phoneLogInfo: actions.phoneLogInfo, isShowCommLog: true};
         default:
             return state;
     }

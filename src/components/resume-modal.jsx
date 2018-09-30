@@ -33,6 +33,7 @@ class ResumeModalComponent extends Component {
                 maskClosable={false}
                 afterClose={()=>this.modalAfterClose()}
                 width={1100}
+                maskClosable = {false}
             >    
                 {visible &&
                     <iframe 

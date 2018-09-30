@@ -289,6 +289,7 @@ export default class TableComponent extends Component{
                     visible={personalMaterialVisible}
                     onCancel={this.hidePersonalMaterilModal}
                     onOk={this.editEmployeeInformation}
+                    maskClosable = {false}
                 >
                     <ul className="personalMaterial">
                         <li style={{overflow:'hidden',marginBottom:24}}>

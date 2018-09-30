@@ -1,6 +1,6 @@
 import React, {Component,PropTypes} from 'react';
 
-import {Button,Modal,Input} from 'antd';
+import {Button,Modal,Input,Icon} from 'antd';
 
 // scrollbars
 import { Scrollbars } from 'react-custom-scrollbars';
@@ -125,7 +125,13 @@ class LeftNavComponent extends Component {
         return (
             <ul className="left-nav box-border">
                 <li>
-                    <a className="title" href="javascript:void(0);">{title}</a>
+                    <a className="title" href="javascript:void(0);">{title}
+                      <div className="add-new pull-right" onClick={()=>this.props.showCreateLabelModal()}>
+                        <Icon type="plus-circle-o" />
+                        <span>新建类别</span>
+                      </div>
+                    </a>
+                    
                     <Scrollbars style={{
                         height: 802
                     }} autoHide={true}>
@@ -166,12 +172,7 @@ class LeftNavComponent extends Component {
                         </dl>
                     </Scrollbars>
                 </li>
-                <li>
-                    <div className="float-button" onClick={()=>this.props.showCreateLabelModal()}>
-                        <Button />
-                        <span>新建类别</span>
-                    </div>
-                </li>
+               
                 {/*新建分类标签Modal*/}
                 <Modal
                     title="新建分类"
@@ -180,6 +181,7 @@ class LeftNavComponent extends Component {
                     confirmLoading={createModal.isLoading}
                     onOk={this.createLabel}
                     onCancel={() => this.props.hideCreateLabelModal()}
+                    maskClosable = {false}
                 >   
                     <div style={{
                         margin: '0 auto',
@@ -220,6 +222,7 @@ class LeftNavComponent extends Component {
                     onOk={this.deleteLabel}
                     confirmLoading={deleteModal.isLoading}
                     onCancel={()=>{this.props.hideDeleteLabelModal()}}
+                    maskClosable = {false}
                 >
                     <p style={{
                         paddingLeft: 20,

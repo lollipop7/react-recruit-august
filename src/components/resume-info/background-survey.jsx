@@ -39,6 +39,7 @@ class BackgroundSurveyModalComponents extends Component {
                 onCancel={this.hideBackgroundModal}
                 zIndex={1001}
                 style={{top:30}}
+                maskClosable = {false}
             >
                 <div>
                     <CreditInvestgation resumeid={resumeid}/>

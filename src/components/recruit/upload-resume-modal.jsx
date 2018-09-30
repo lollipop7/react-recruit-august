@@ -129,6 +129,7 @@ class UploadResumeModalComponents extends Component {
                 visible={visible}
                 onCancel={isLoading ? () => {} : hideModal}
                 footer={null}
+                maskClosable = {false}
             >
                 <ul>
                     <li>

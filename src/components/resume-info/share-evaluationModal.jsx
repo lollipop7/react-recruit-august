@@ -52,6 +52,7 @@ class ShareEvaluationModalComponents extends Component {
                 footer = {null}
                 onCancel={ this.props.hideQrcodeLinkModal.bind(this)}
                 style={{top:300}}
+                maskClosable = {false}
                 >
                 <p className="title">{`分享面试评估表--${username}`}</p>
                 <Tabs defaultActiveKey="1" size="small">

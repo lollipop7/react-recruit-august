@@ -29,7 +29,6 @@ class ResumeInfoPage extends Component {
     state = {
         type: 0,
         time:"",//当前流程约定时间
-        stage:"",//当前流程
         thelable:"",//标签
         emailState:"none",
         hasHisCall: true //是否沟通过
@@ -97,8 +96,8 @@ class ResumeInfoPage extends Component {
     };
 
     render() {
-        const {type , time , stage, thelable ,emailState, hasHisCall} = this.state,
-            {isLoading,data,location,routeParams,getRecruitResumeInfo,uriParams, hasSingleCall, showCommLog} = this.props,      
+        const {type , time , thelable ,emailState, hasHisCall} = this.state,
+            {isLoading,data,location,routeParams,getRecruitResumeInfo,uriParams, hasSingleCall, isShowCommLog} = this.props,      
             { logId } = routeParams,   
             isTalent = this.isInTalentPage(location.pathname),
             isRecruit = this.isInRecruitPage(location.pathname),
@@ -131,6 +130,7 @@ class ResumeInfoPage extends Component {
                                 <HeaderInfoComponent 
                                     handleChangeType = {this.handleChangeType}
                                     data={data}
+                                    hasHisCall = {hasHisCall}
                                 />
                             }
                             {isRecruit &&
@@ -161,7 +161,7 @@ class ResumeInfoPage extends Component {
                                     >
                                         行业薪资
                                     </li>}
-                                    {staged!=undefined && staged.stageid>1 && hasHisCall && showCommLog
+                                    {staged!=undefined  && hasHisCall && isShowCommLog
                                         &&<li 
                                             className={`tab-item table-cell boder-left-none ${type==3 ? 'active' : ''}`}
                                             onClick={() => this.handleChangeType(3)}
@@ -196,9 +196,13 @@ class ResumeInfoPage extends Component {
                                         <SearchSalaryComponent/>
                                     </div>
                                 }
-                                {isRecruit && staged!=undefined && staged.stageid>1 && hasHisCall && showCommLog &&
+                                {/* 注掉staged!=undefined && staged.stageid>1 && */}
+                                {isRecruit &&  hasHisCall && isShowCommLog &&
                                     <div className={`comm-content box-border ${type==3 ? '' : 'none'}`}>
-                                        <CommLog customerdetail={{
+                                        <CommLog 
+                                            data={data}
+                                            staged={staged}
+                                        customerdetail={{
                                             username,
                                             telephone
                                         }}/>
@@ -236,7 +240,8 @@ const mapStateToProps = state => ({
     //历史邮件
     historyEmail: state.Email.historyEmail,
     hasSingleCall: state.IntellHR.hasSingleCall,
-    showCommLog: state.IntellHR.showCommLog,
+    isShowCommLog: state.IntellHR.isShowCommLog,
+    phoneLogInfo: state.IntellHR.phoneLogInfo,
 })
 const mapDispatchToProps = dispatch => ({
     getRecruitResumeInfo: bindActionCreators(Actions.ResumeActions.getRecruitResumeInfo, dispatch),

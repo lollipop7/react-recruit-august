@@ -167,6 +167,7 @@ class EvaluationModalComponents extends Component {
                 className = "evaluation-modal grey-close-header"
                 onCancel={this.hideEvaluationModal}
                 onOk = {this.addEvaluation}
+                maskClosable = {false}
             >
                 <div className="evaluation-list">
                     <h3>面试官列表：</h3>

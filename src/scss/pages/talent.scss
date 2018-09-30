@@ -4,21 +4,27 @@
         position: relative;
     }
     .left-nav {
-        li:last-child {
-            position: absolute;
-            width: 100%;
-            bottom: 20px;
-        }
-        .float-button {
-            position: relative;
-            width: 56px;
-            margin: auto;
+        // li:last-child {
+        //     position: absolute;
+        //     width: 100%;
+        //     bottom: 20px;
+        // }
+        // .float-button {
+        //     position: relative;
+        //     width: 56px;
+        //     margin: auto;
            
-        }
-        button {
+        // }
+        // button {
             
-            background-size: 26px 26px;
-            background-image: url(/static/images/plus.png);
+            // background-size: 26px 26px;
+            // background-image: url(/static/images/plus.png);
+        // }
+        .add-new {
+            color: #0086c9;
+            span {
+                padding-left: 5px;
+            }
         }
     }
     .form {

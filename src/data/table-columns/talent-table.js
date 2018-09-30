@@ -44,13 +44,13 @@ module.exports = [
         "key": "workyears",
         "width": 84
     },
-    {
-        "title": "期望职位",
-        "dataIndex": "postids",
-        "key": "postids",
-        "width": 190,
-       // render: renderWithATag
-    },
+    // {
+    //     "title": "期望职位",
+    //     "dataIndex": "postids",
+    //     "key": "postids",
+    //     "width": 190,
+    //    // render: renderWithATag
+    // },
     {
         "title": "创建日期",
         "dataIndex": "createdate",
@@ -66,9 +66,9 @@ module.exports = [
         "key": "control",
         "width": 79
     },
-    {
-        "title": "收藏",
-        "dataIndex": "iscollection",
-        "key": "iscollection"
-    }
+    // {
+    //     "title": "收藏",
+    //     "dataIndex": "iscollection",
+    //     "key": "iscollection"
+    // }
 ]

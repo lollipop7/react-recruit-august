@@ -37,6 +37,7 @@ class EmployeeModalComponent extends Component {
                 footer={null}
                 afterClose={()=>this.modalAfterClose()}
                 width={1100}
+                maskClosable = {false}
             >    
                 {visible &&
                     <iframe 

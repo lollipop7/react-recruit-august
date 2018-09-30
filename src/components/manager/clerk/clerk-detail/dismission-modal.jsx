@@ -96,6 +96,7 @@ export default class DismissionModal extends Component {
             onCancel={hideDismissionModal}
             onOk={this.handleDismissClerk}
             width={827}
+            maskClosable = {false}
         >
             <ul>
                 <li className="time-field">

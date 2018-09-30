@@ -141,6 +141,7 @@ class DepartmentStaff extends Component {
               visible={this.state.visible}
               onOk={this.handleOk}
               onCancel={this.handleCancel}
+              maskClosable = {false}
             >
               <div className='sub'>
                 <span className='sub-title'>原属部门：</span><span className='sub-content'>{departmentInfo.department}</span>

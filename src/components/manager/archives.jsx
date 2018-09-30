@@ -114,6 +114,7 @@ import * as Actions from 'actions';
                         closable={false}
                         footer={null}
                         visible={progressVisible}
+                        maskClosable = {false}
                     >
                         <Progress percent={percent} />
                         <span>材料附件下载</span>

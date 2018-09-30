@@ -183,6 +183,7 @@ class LeftTreePage extends Component {
               visible={this.state.visible}
               onOk={this.handleOk}
               onCancel={this.handleCancel}
+              maskClosable = {false}
             >
               <div className={type=='add'?'sub':'sub hide'}>
                 <span className='sub-title'>上级：</span><span className='sub-content'>{name2}</span>

@@ -92,6 +92,7 @@ class MoveModalComponents extends Component {
                         confirmLoading={isLoading}
                         onOk={this.moveResume}
                         onCancel={() => this.setModalVisible(false)}
+                        maskClosable = {false}
                     >
                         <span style={{
                             marginRight: 16

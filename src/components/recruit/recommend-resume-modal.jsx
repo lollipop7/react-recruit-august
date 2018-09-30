@@ -95,6 +95,7 @@ class RecommendResumeModalComponents extends Component {
                 visible={visible}
                 onCancel={recommendPositioning ? ()=>{} : hideModal}
                 footer={null}
+                maskClosable = {false}
             >
                 <div>
                     <div className="form">

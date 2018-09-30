@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button , Icon} from 'antd';
+import {Button , Icon, Link} from 'antd';
 
 import trim from 'lodash/trim';
 import find from 'lodash/find';
@@ -108,13 +108,8 @@ class HeaderInfoComponent extends Component {
     showBackgroundModal = () => {
         this.props.showBackgroundModal()
     }
-    // 使用Promise封装setState
-    setStateAsync(state){
-        return new Promise((resolve)=>{
-            this.setState(state, resolve)
-        })
-    }
-    async handleRobotCall(){
+    
+    async handleRobotCall(stage){
         const 
         {data, historyEmail, triSingleCall} = this.props,
         {   
@@ -131,24 +126,25 @@ class HeaderInfoComponent extends Component {
         // "userName": "string,用户名",
         // "company_id": "integer,公司id",
         // "robot_type": "integer,机器人类型；1-意向沟通机器人，2-面试邀约机器人"
-    
+        let robot_type = stage.stageid == 1 ? 1 : 2;
+        console.log('打电话', robot_type)
         triSingleCall({
             resumeid : resumeid,
-            robot_type: 1,
+            robot_type: robot_type,
             mobile: '18951317287',
             userName: username,
             company_id: '11'
         })
-        
-        
     }
-    handleReload = (stageid) => {
+
+    handleReload = (stage) => {
         const {data, getPhoneLogInfoByRID , handleChangeType} = this.props,
         {resumeid} = data;
+        
         new Promise(()=>{
             getPhoneLogInfoByRID({
-            robot_type: 1,
-            resumeid: '1450001'
+            robot_type: 1 || 2,
+            resumeid: resumeid  
             })
         }).then(()=>{
             if(stage){
@@ -159,7 +155,7 @@ class HeaderInfoComponent extends Component {
     
 
     render() {
-        const {data,modalVisible,currentStage,evaluation, hasSingleCall } = this.props,
+        const {data,modalVisible,currentStage,evaluation, hasSingleCall, hasHisCall } = this.props,
             {
                 resumeInfo={},
                 resumeid, //简历id
@@ -315,14 +311,14 @@ class HeaderInfoComponent extends Component {
                             <div className='intell-opt'>
                                 {stage !== undefined && stage.stageid == 1 &&
                                     <Button 
-                                        onClick={()=>this.handleRobotCall()}
+                                        onClick={()=>this.handleRobotCall(stage)}
                                         className="watch-invitaion-button">
                                     AI意向沟通
                                     </Button>
                                 }
                                 {stage !== undefined && stage.stageid == 2 &&
                                     <Button 
-                                        onClick={()=>this.handleRobotCall()}
+                                        onClick={()=>this.handleRobotCall(stage)}
                                         className="watch-invitaion-button">
                                     AI面试邀约
                                     </Button>
@@ -335,16 +331,21 @@ class HeaderInfoComponent extends Component {
                                 {/* <div> 
                                 <img  src="./static/images/resume/right-arrow.png" alt="more"/>
                                 </div> */}
-                                {/* {hasSingleCall && */}
+                                {/* {stage !== undefined && stage.stageid < 3 && hasSingleCall &&
                                     <div className="comm-result">
-                                        <span>AI邀约结果：沟通中...</span>
+                                        <span>AI邀约结果：</span>
                                         <Button 
                                             className="reload-btn"
                                             icon="reload" 
                                             onClick={()=>this.handleReload(stage)}>刷新</Button>
                                     </div>
-                                {/* } */}
-                                
+                                } */}
+                                { hasSingleCall || hasHisCall &&
+                                    <div className='comm-link'
+                                        onClick={()=>this.handleReload(stage)}> 
+                                    查看AI沟通记录
+                                    </div>
+                                }
                             </div>
                         </div>
                         <div className="table">
