@@ -75,9 +75,9 @@ class TalentPage extends BasicPage {
         this._requestData();
     }
 
-    shouldComponentUpdate(nextProps,nextState) {
-        return this.props !== nextProps || nextState !== this.state;
-    }
+    // shouldComponentUpdate(nextProps,nextState) {
+    //     return this.props !== nextProps || nextState !== this.state;
+    // }
 
     componentWillUpdate(nextProps,nextState) {
         if(this.props.routeParams.keywords !== nextProps.routeParams.keywords){

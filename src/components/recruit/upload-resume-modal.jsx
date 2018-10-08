@@ -113,7 +113,7 @@ class UploadResumeModalComponents extends Component {
         const {filePath} = response,
             fileNameJson = `{${name}:${filePath}}`;
         source = source.indexOf('basic') !== -1 ? 'basic' : source;
-        uploadResume({source,fileNameJson,positionid},this.props);
+        uploadResume({source,fileNameJson,positionid},this.props, {isRecruitUpload: true, isTalentUpload: false});
     }
 
     render() {
@@ -234,7 +234,8 @@ const mapDispatchToProps = dispatch => ({
     hideModal: bindActionCreators(Actions.RecruitActions.hideUploadModal, dispatch),
     setResetFormFalse: bindActionCreators(Actions.RecruitActions.setResetFormFalse, dispatch),
     removeUploadFIle: bindActionCreators(Actions.FileActions.removeUploadFIle, dispatch),
-    getRecruitList: bindActionCreators(Actions.RecruitActions.getRecruitList, dispatch)
+    getRecruitList: bindActionCreators(Actions.RecruitActions.getRecruitList, dispatch),
+    getTalentList: bindActionCreators(Actions.TalentActions.getTalentList, dispatch),
 })
 
 export default connect(

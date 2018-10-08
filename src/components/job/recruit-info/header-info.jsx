@@ -131,7 +131,7 @@ class HeaderInfoComponent extends Component {
         triSingleCall({
             resumeid : resumeid,
             robot_type: robot_type,
-            mobile: '18951317287',
+            mobile: telephone,
             userName: username,
             company_id: '11'
         })

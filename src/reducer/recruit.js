@@ -34,8 +34,9 @@ const initialState = {
     uploadModal:{
         visible: false,
         isLoading: false,
-        resetForm: false
+        resetForm: false,       
     },
+    
     recommendModal: {
         visible: false,
         isLoading: false,

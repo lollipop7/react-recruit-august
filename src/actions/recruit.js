@@ -85,7 +85,7 @@ export const getRecruitList = (data=defaultData) => (dispatch,getState) => {
 }
 
 // 上传简历
-export const uploadResume = (data,props) => (dispatch,getState) => {
+export const uploadResume = (data,props, params) => (dispatch,getState) => {
     dispatch(UPLOAD_RESUME_START);
     AjaxByToken('resumeUpload',{
         head: {
@@ -103,8 +103,10 @@ export const uploadResume = (data,props) => (dispatch,getState) => {
         setTimeout(()=>{
             dispatch(HIDE_UPLOAD_MODAL);
         },500);
-        const {getRecruitList} = props;
-        getRecruitList({stageid:'0',skip:'0',range:'2'});
+        const {getRecruitList, getTalentList} = props;
+        const {isRecruitUpload, isTalentUpload} = params;
+        isRecruitUpload && getRecruitList({stageid:'0',skip:'0',range:'2'});
+        isTalentUpload && getTalentList({start: 0, type: 'all'})
     },err=>{
         dispatch(UPLOAD_RESUME_DONE);
     });
