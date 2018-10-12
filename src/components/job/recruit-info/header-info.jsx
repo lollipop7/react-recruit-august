@@ -108,54 +108,15 @@ class HeaderInfoComponent extends Component {
     showBackgroundModal = () => {
         this.props.showBackgroundModal()
     }
-    
-    async handleRobotCall(stage){
-        const 
-        {data, historyEmail, triSingleCall} = this.props,
-        {   
-            resumeInfo={},
-            resumeid,
-        } = data,
-        {
-            username,
-            telephone,
-        } = resumeInfo;
-        
-        // "resumeid": "string,简历id",
-        // "mobile": "string,手机号",
-        // "userName": "string,用户名",
-        // "company_id": "integer,公司id",
-        // "robot_type": "integer,机器人类型；1-意向沟通机器人，2-面试邀约机器人"
-        let robot_type = stage.stageid == 1 ? 1 : 2;
-        console.log('打电话', robot_type)
-        triSingleCall({
-            resumeid : resumeid,
-            robot_type: robot_type,
-            mobile: telephone,
-            userName: username,
-            company_id: '11'
-        })
-    }
 
-    handleReload = (stage) => {
-        const {data, getPhoneLogInfoByRID , handleChangeType} = this.props,
-        {resumeid} = data;
-        
-        new Promise(()=>{
-            getPhoneLogInfoByRID({
-            robot_type: 1 || 2,
-            resumeid: resumeid  
-            })
-        }).then(()=>{
-            if(stage){
-                stage.stageid>1 && handleChangeType(3)
-            }
-        })
+    showRobotCallModal = () => {
+        this.props.showRobotCallModal();
     }
+    
     
 
     render() {
-        const {data,modalVisible,currentStage,evaluation, hasSingleCall, hasHisCall } = this.props,
+        const {data,modalVisible,currentStage,evaluation, hasSingleCall } = this.props,
             {
                 resumeInfo={},
                 resumeid, //简历id
@@ -311,14 +272,14 @@ class HeaderInfoComponent extends Component {
                             <div className='intell-opt'>
                                 {stage !== undefined && stage.stageid == 1 &&
                                     <Button 
-                                        onClick={()=>this.handleRobotCall(stage)}
+                                        onClick={()=>this.showRobotCallModal()}
                                         className="watch-invitaion-button">
                                     AI意向沟通
                                     </Button>
                                 }
                                 {stage !== undefined && stage.stageid == 2 &&
                                     <Button 
-                                        onClick={()=>this.handleRobotCall(stage)}
+                                        onClick={()=>this.showRobotCallModal()}
                                         className="watch-invitaion-button">
                                     AI面试邀约
                                     </Button>
@@ -326,26 +287,8 @@ class HeaderInfoComponent extends Component {
                                 <Button className="next-btn"
                                     onClick={this.changeStage}
                                 >
-                                操作
+                                进入下一步
                                 </Button>
-                                {/* <div> 
-                                <img  src="./static/images/resume/right-arrow.png" alt="more"/>
-                                </div> */}
-                                {/* {stage !== undefined && stage.stageid < 3 && hasSingleCall &&
-                                    <div className="comm-result">
-                                        <span>AI邀约结果：</span>
-                                        <Button 
-                                            className="reload-btn"
-                                            icon="reload" 
-                                            onClick={()=>this.handleReload(stage)}>刷新</Button>
-                                    </div>
-                                } */}
-                                { hasSingleCall || hasHisCall &&
-                                    <div className='comm-link'
-                                        onClick={()=>this.handleReload(stage)}> 
-                                    查看AI沟通记录
-                                    </div>
-                                }
                             </div>
                         </div>
                         <div className="table">
@@ -394,7 +337,8 @@ class HeaderInfoComponent extends Component {
 const mapStateToProps = state => ({
     isDownLoading: state.Resume.isDownLoading,
     currentStage : state.Resume.currentStage,
-    hasSingleCall: state.IntellHR.hasSingleCall
+    hasSingleCall: state.IntellHR.hasSingleCall,
+    robotCallModalVisiable: state.IntellHR.robotCallModalVisiable,
 })
 const mapDispatchToProps = dispatch => ({
     downloadResume: bindActionCreators(Actions.ResumeActions.downloadResume, dispatch),
@@ -406,7 +350,7 @@ const mapDispatchToProps = dispatch => ({
     getResumeUrl: bindActionCreators(Actions.ResumeActions.getResumeUrl, dispatch),
     showBackgroundModal: bindActionCreators(Actions.ResumeActions.showBackgroundModal, dispatch),
     triSingleCall: bindActionCreators(Actions.IntellHRActions.triSingleCall, dispatch),
-    getPhoneLogInfoByRID: bindActionCreators(Actions.IntellHRActions.getPhoneLogInfoByRID, dispatch)
+    showRobotCallModal: bindActionCreators(Actions.IntellHRActions.showRobotCallModal, dispatch),
 })
 
 export default connect(

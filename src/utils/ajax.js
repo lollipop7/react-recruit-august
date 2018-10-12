@@ -132,7 +132,7 @@ export const AjaxByRobotPost = (uri, data) => {
         .then(response => {
             const {data} = response;
             const { returnCode, returnMsg } = data;
-            if (returnCode !== 'AAAAAAA') {
+            if (returnCode !== 'AAAAAAA' && returnCode !== '900' ) {    
                 if(returnMsg === '登录已失效,请重新登录' && returnCode === '0000005'){
                     cancelRequest();
                     store.remove('token');
@@ -141,7 +141,9 @@ export const AjaxByRobotPost = (uri, data) => {
                 // console.info(`${returnCode}:${returnMsg}`);
                 notification.error(returnMsg);
                 reject(response);
-            } else {
+            } if(returnCode == '900') {
+                resolve(data)
+            }else {
                 resolve(omit(data,['returnCode','returnMsg']));
             }
         })

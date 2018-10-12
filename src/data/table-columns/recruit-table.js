@@ -29,14 +29,14 @@ module.exports = [
         "title": "工作年限",
         "dataIndex": "workyears",
         "key": "workyears",
-        "width": 90,
+        "width": 100,
         //render: renderWithATag
     },
     {
         "title": "电话",
         "dataIndex": "telephone",
         "key": "telephone",
-        "width": 113
+        "width": 200
     },
     // {
     //     "title": "邮箱",
@@ -48,22 +48,19 @@ module.exports = [
         "title": "居住地",
         "dataIndex": "livecityid",
         "key": "livecityid",
-        "width": 109
+        "width": 120
     },
     {
         "title": "申请时间",
         "dataIndex": "deliverytime",
         "key": "deliverytime",
-        "width": 99,
+        "width": 120,
         //render: renderWithATag
     },
     {
         "title": "状态",
         "dataIndex": "prestatusname",
         "key": "prestatusname"
-    },{
-        "title": "AI电话",
-        "dataIndex": "AIinvitationstatus",
-        "key": "AIinvitationstatus"
     }
+    
 ]

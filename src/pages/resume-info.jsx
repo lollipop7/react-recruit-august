@@ -14,6 +14,7 @@ import EvaluationModalComponents from 'components/resume-info/interview-evaluati
 import BackgroundSurveyModalComponents from 'components/resume-info/background-survey';
 import ShareEvaluationModalComponents from 'components/resume-info/share-evaluationModal';
 import CommLog from 'components/intellHR/comm-log';
+import RobotCallModal from 'components/intellHR/robot-call-modal';
 
 // 富文本编辑器
 import EmailEditorComponents from 'components/email/right';
@@ -31,7 +32,6 @@ class ResumeInfoPage extends Component {
         time:"",//当前流程约定时间
         thelable:"",//标签
         emailState:"none",
-        hasHisCall: true //是否沟通过
     }
     static contextTypes = {
         router: PropTypes.object
@@ -61,8 +61,19 @@ class ResumeInfoPage extends Component {
         return this.props !== nextProps || this.state !== nextState;
     }
 
-    handleChangeType = (type) => {
-        this.setState({type});
+    setStateAsync = (state) => {
+        return new Promise(resolve => {
+            this.setState(state, resolve)
+        })
+    }
+
+    handleChangeType = (type, staged) => {
+        this.setStateAsync({type}).then(()=>{
+            if(type==3){
+                this.handleReload(staged)
+            }
+        })
+        
     }
 
     isInTalentPage(pathname) {
@@ -79,6 +90,19 @@ class ResumeInfoPage extends Component {
         this.props.hideResumeModal()
         //this.context.router.push(`/email`);
     }
+
+    handleReload = (staged) => {
+        const {data, getPhoneLogInfoByRID } = this.props,
+        {resumeid} = data;
+        
+        new Promise(()=>{
+            getPhoneLogInfoByRID({
+            robot_type: parseInt(staged.stageid),
+            resumeid: resumeid  
+            })
+        })
+    }
+
     componentWillReceiveProps(nextProps){
         const {historyEmail , data} = nextProps,
               {list} = historyEmail;                 
@@ -96,8 +120,8 @@ class ResumeInfoPage extends Component {
     };
 
     render() {
-        const {type , time , thelable ,emailState, hasHisCall} = this.state,
-            {isLoading,data,location,routeParams,getRecruitResumeInfo,uriParams, hasSingleCall, isShowCommLog} = this.props,      
+        const {type , time , thelable ,emailState} = this.state,
+            {isLoading,data,location,routeParams,getRecruitResumeInfo,uriParams, hasSingleCall, hasHisCall, phoneLogInfo} = this.props,      
             { logId } = routeParams,   
             isTalent = this.isInTalentPage(location.pathname),
             isRecruit = this.isInRecruitPage(location.pathname),
@@ -106,6 +130,7 @@ class ResumeInfoPage extends Component {
         const staged = find(stagesMap,item=>{
                 return item.iscurrentstage === '1'
             });
+        const isShowCommLog = staged!=undefined && staged.stageid <= 2 ? true : false;
         return (
             <div className="resume-info-container" style={{
                 height: isLoading ? '100%' : '',
@@ -128,9 +153,7 @@ class ResumeInfoPage extends Component {
                             }
                             {isRecruit &&
                                 <HeaderInfoComponent 
-                                    handleChangeType = {this.handleChangeType}
                                     data={data}
-                                    hasHisCall = {hasHisCall}
                                 />
                             }
                             {isRecruit &&
@@ -161,10 +184,10 @@ class ResumeInfoPage extends Component {
                                     >
                                         行业薪资
                                     </li>}
-                                    {staged!=undefined  && hasHisCall && isShowCommLog
+                                    {staged!=undefined && isShowCommLog
                                         &&<li 
                                             className={`tab-item table-cell boder-left-none ${type==3 ? 'active' : ''}`}
-                                            onClick={() => this.handleChangeType(3)}
+                                            onClick={() => this.handleChangeType(3, staged)}
                                         >
                                             查看通话记录
                                         </li>
@@ -196,9 +219,17 @@ class ResumeInfoPage extends Component {
                                         <SearchSalaryComponent/>
                                     </div>
                                 }
-                                {/* 注掉staged!=undefined && staged.stageid>1 && */}
                                 {isRecruit &&  hasHisCall && isShowCommLog &&
-                                    <div className={`comm-content box-border ${type==3 ? '' : 'none'}`}>
+                                    <div className={`comm-content box-border ${type==3 ? '' : 'none'}`}
+                                    >
+                                    {phoneLogInfo == '900' ? 
+                                        <div style={{
+                                            width: "100%",
+                                            padding: 30
+                                        }}>
+                                            未查询到通话记录
+                                        </div>
+                                     : 
                                         <CommLog 
                                             data={data}
                                             staged={staged}
@@ -206,6 +237,7 @@ class ResumeInfoPage extends Component {
                                             username,
                                             telephone
                                         }}/>
+                                    }    
                                     </div>
                                 }
                             </div> 
@@ -227,6 +259,12 @@ class ResumeInfoPage extends Component {
                                 jobid = {currentPId}
                                 username = {username}
                             />
+                            <RobotCallModal
+                                username = {username}
+                                telephone = {telephone}
+                                resumeid = {resumeid}
+                                staged={staged}
+                            />    
                         </div>
                 }
             </div>
@@ -240,7 +278,7 @@ const mapStateToProps = state => ({
     //历史邮件
     historyEmail: state.Email.historyEmail,
     hasSingleCall: state.IntellHR.hasSingleCall,
-    isShowCommLog: state.IntellHR.isShowCommLog,
+    hasHisCall: state.IntellHR.hasHisCall,
     phoneLogInfo: state.IntellHR.phoneLogInfo,
 })
 const mapDispatchToProps = dispatch => ({
@@ -249,6 +287,7 @@ const mapDispatchToProps = dispatch => ({
     getCrewList: bindActionCreators(Actions.ManageActions.getCrewList,dispatch),
     getEmailHistory: bindActionCreators(Actions.EmailActions.getEmailHistory, dispatch),
     hideResumeModal: bindActionCreators(Actions.RecruitActions.hideResumeModal, dispatch),
+    getPhoneLogInfoByRID: bindActionCreators(Actions.IntellHRActions.getPhoneLogInfoByRID, dispatch)
 })
 
 export default connect(

@@ -18,7 +18,8 @@ import Promise from 'promise-polyfill';
 //window.prefixUri = 'http://yun.51jrq.com/51hr/api/web';
 // window.prefixUri = '/51hr/api/web';     //线上环境
 // window.resumeUrl = '/resumeClient/api';
-window.prefixUri = '/hrmanage/api/web'; //测试环境
+// window.robotUri = '/robotagent/api/robot';
+window.prefixUri = '/51hr/api/web'; //测试环境
 window.resumeUrl = '/resumeClient/api'; //请求接口前缀
 window.robotUri = '/robotagent/api/robot'; //请求智能hr
 // css文件

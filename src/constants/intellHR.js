@@ -2,3 +2,5 @@
 export const SINGLECALL = 'SINGLECALL';
 // 指定通话的详细信息
 export const PHONELOGINFO = 'PHONELOGINFO';
+export const SHOW_ROBOT_CALL_MODAL = 'SHOW_ROBOT_CALL_MODAL';
+export const HIDE_ROBOT_CALL_MODAL = 'HIDE_ROBOT_CALL_MODAL';

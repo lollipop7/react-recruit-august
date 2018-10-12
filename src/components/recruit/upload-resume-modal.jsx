@@ -21,7 +21,6 @@ class UploadResumeModalComponents extends Component {
         '支持单个html,xls等格式的简历。',
         '多文件请压缩成zip包上传。',
         '猎聘HR简历需包含图片信息，并且只支持压缩上传。',
-        '猎聘HR简历需包含图片信息，并且只支持压缩上传。',
         '上传文件最大支持100M,建议分成小包多次上传。',
         '导入简历过程中请不要刷新页面。'
     ]

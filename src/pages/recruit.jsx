@@ -28,7 +28,7 @@ class RecruitPage extends BasicPage {
 
     state = {
         paginationCurrent: 1,
-        tableHead: "职位申请"
+        tableHead: "简历初筛"
     }
 
     // 子框架是否刷新

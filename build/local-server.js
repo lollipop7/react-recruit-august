@@ -5,11 +5,12 @@ var config = require('../config')
 var proxyMiddleware = require('http-proxy-middleware')
 
 var proxyTable =  {
-      '/hrmanage': {target:'http://192.168.1.251:66'},        //测试环境
+      '/51hr': {target:'http://192.168.1.251:66'},        //测试环境
       '/resumeClient': {target:'http://192.168.1.251:8088'},   //反向代理 映射
       '/robotagent': {target: 'http://192.168.1.251:66'},
-      // '/resumeClient': {target:'http://hunter.51jrq.com'},   
-      // '/hrmanage': {target:'http://yun.51jrq.com'},
+      // '/resumeClient': {target:'http://hunter.51jrq.com'},   //生产环境
+      // '/51hr': {target:'http://yun.51jrq.com'},
+      // '/robotagent': {target: 'http://hunter.51jrq.com'},
       //'/resumeClient': {target:'http://51jrq-servers2:8088'}
       // '/web': {target:'http://192.168.101.57:66/hrmanage/api'}
     }
@@ -28,7 +29,7 @@ Object.keys(proxyTable).forEach(function (context) {
   app.use(proxyMiddleware(options.filter || context, options))
 })
 
-var server = app.listen(3000, function () {
+var server = app.listen(8080, function () {
   var host = server.address().address;
   var port = server.address().port;
 

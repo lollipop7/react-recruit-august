@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import {Tooltip, notification } from 'antd';
 
 // lodash
-import find from 'lodash/find';
+import filter from 'lodash/filter';
 import assign from 'lodash/assign';
 import isEmpty from 'lodash/isEmpty';
+import moment from 'moment';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -12,17 +13,9 @@ import * as Actions from 'actions';
 
 class CommLog extends Component {
     state = {
-        selectedIndex: 1,
-        intentPhoneLog: {}, // 意向沟通 stageid = 1
-        invitePhoneLog: {}  // 面试邀约 stageid = 2
+        _selectedIndex: 0,
+        rightPhoneLog: []
     }
-
-    // componentDidMount(){
-    //     const {staged} = this.props;
-    //     if (staged.stageid < 3) {
-    //         this.setStateAsync({selectedIndex: staged.stageid})
-    //     }
-    // }
 
     // 使用Promise封装setState
     setStateAsync(state){
@@ -31,15 +24,17 @@ class CommLog extends Component {
         })
     }
 
-    finish(status){
+    finish = (status) => {
         switch(status){
-            case 0 : return '已接通';
-            case 6 : return '未接通';
+            case 0 : 
+                return '已接通';
+            case 6 : 
+                return '未接通';
             default : ;
         }
     }
 
-    formatSeconds(value){
+    formatSeconds = (value) =>{
         let secondTime = parseInt(value);// 秒
         let minuteTime = 0;// 分
         let hourTime = 0;// 小时
@@ -64,40 +59,32 @@ class CommLog extends Component {
         if(hourTime > 0) {
             result = "" + parseInt(hourTime) + "小时" + result;
         }
+        //把result的值放在state里让后拿去展示，上面的也一样
         return result;
     }
 
-    handleChangeTab = (selectedIndex) => {
-        const {data, getPhoneLogInfoByRID, phoneLogInfo} = this.props,
-        {callLogsList} = phoneLogInfo,
-        {resumeid} = data;
-        
-        let currentPhoneLog = find(callLogsList, item => {
-            return item.callStatus === 2
+    handleChangeTab = (_selectedIndex, item) => {
+        this.setStateAsync({
+            _selectedIndex
         })
-        this.setStateAsync({selectedIndex})
-        .then(()=>{
-            getPhoneLogInfoByRID({
-                robot_type: selectedIndex,
-                resumeid: resumeid  
-            })
+        this.setStateAsync({
+            rightPhoneLog: [item]
         })
+       
     }
 
     render(){
-        const {selectedIndex} = this.state,
+        const {_selectedIndex, rightPhoneLog} = this.state,
          {customerdetail, phoneLogInfo, staged} = this.props,
          {username, telephone} = customerdetail;
          const {
              mobile, name,
              callLogsList
          } = phoneLogInfo;
-         let currentPhoneLog = find(callLogsList, item => {
+         let currentPhoneLogs = filter(callLogsList, item => {
             return item.callStatus === 2
         })
-        if(currentPhoneLog == undefined) {
-            notification.error({message:'未找到通话记录'});
-        }
+        rightPhoneLog[0] = currentPhoneLogs[_selectedIndex];
         return (
             <div className="comm-log">
                 <div className="base-slider-wrap">
@@ -115,64 +102,54 @@ class CommLog extends Component {
                             <p style={{
                                 fontSize: "14px",
                                 color: "rgba(0,0,0,.45)"
-                            }}>共{2}条通话记录</p>
+                            }}>共{currentPhoneLogs.length}条通话记录</p>
                             <div className="follow-card-wrap">
-                                <div className={`follow-card ${selectedIndex==1 ? 'follow-card-active' : ''}`}
-                                    onClick={()=>this.handleChangeTab(1)}
-                                >
-                                    <ul>
-                                        <li>
-                                            {/* 在申请节点发起的，就是意向沟通，在邀约节点发起的，就是面试邀约 */}
-                                            <span>AI-面试邀约</span>
-                                            <span>通话时长：{this.formatSeconds(currentPhoneLog.duration)}</span>
-                                        </li>
-                                        <li>
-                                            {/* 已接通、未接通、空号 */}
-                                            {/* 已接通:（AI-面试邀约）：候选人接受了面试、候选人拒绝了面试、候选人意向模糊  */}
-                                            {this.finish(currentPhoneLog.finishStatus)}
-                                        </li>
-                                        <li>
-                                            {currentPhoneLog.startTime}
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className={`follow-card ${selectedIndex==2 ? 'follow-card-active' : ''}`}
-                                    onClick={()=>this.handleChangeTab(2)}
-                                >
-                                    <ul>
-                                        <li>
-                                            <span>AI-意向沟通</span>
-                                            <span>通话时长：{this.formatSeconds(currentPhoneLog.duration)}</span>
-                                        </li>
-                                        <li>
-                                            {/* 已接通:（AI-意向沟通）：候选人有求职意向、候选人暂无求职意向、候选人意向模糊  */}
-                                            {this.finish(currentPhoneLog.finishStatus)}
-                                        </li>
-                                        <li>
-                                            {currentPhoneLog.startTime}
-                                        </li>
-                                    </ul>
-                                </div>
+                                { 
+                                    currentPhoneLogs.map((item, index) => {
+                                        const duration = this.formatSeconds(item.duration);
+                                        const finishStatus = this.finish(item.finishStatus);
+                                        const startTime = item.startTime;
+                                        return (
+                                            <div 
+                                                className={`follow-card ${index == _selectedIndex?  'follow-card-active' : ''}`} 
+                                                key={index}
+                                                onClick={()=>this.handleChangeTab(index, item)}
+                                            >
+                                                <ul>
+                                                    <li>
+                                                        <span>AI-{item.robotType == 1 ? '意向沟通' : '面试邀约'}</span>
+                                                        <span>通话时长：{duration}</span>
+                                                    </li>
+                                                    <li>
+                                                        {finishStatus}
+                                                    </li>
+                                                    <li>
+                                                        {startTime}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        )
+                                    })
+                                }
                             </div>
                         </div>
                     </div>
                     <div className="base-slider-extra">
                         {
-                            currentPhoneLog &&
                             <div className="customer-detail-call-log">
                                 <div className="call-log-header">
-                                    <h5>通话记录<span className="call-log-id">id: {currentPhoneLog.callInstanceId}</span></h5>
+                                    <h5>通话记录<span className="call-log-id">id: {rightPhoneLog[0].callInstanceId}</span></h5>
                                     <div className="component-base-icon"></div>
                                 </div>
                                 <div className="calllog-switch">
-                                    <audio controls className="call-audio" src={currentPhoneLog.phoneLog.luyinOssUrl}></audio>
+                                    <audio controls className="call-audio" src={rightPhoneLog[0].phoneLog.luyinOssUrl}></audio>
                                 </div>
                                 <div className="call-log-detail"> 
                                     <div className="conversation">
-                                        <audio src={currentPhoneLog.phoneLog.luyinOssUrl}></audio>
+                                        <audio src={rightPhoneLog[0].phoneLog.luyinOssUrl}></audio>
                                         <div className="session-wrapper">
                                             {
-                                                currentPhoneLog.phoneLog.phoneLogs.map((item, index)=>{
+                                                rightPhoneLog[0].phoneLog.phoneLogs.map((item, index)=>{
                                                     if(item.speaker == 'AI'){
                                                         return (
                                                             <div className="session-item" key={index}>
@@ -219,10 +196,10 @@ class CommLog extends Component {
                                 </div>
                                 <div className="edit-user-level">
                                     <div className="call-log-tags">
-                                        <span>通话时长{currentPhoneLog.duration}秒</span><span>对话{currentPhoneLog.phoneLog.phoneLogs.length}轮</span>
+                                        <span>通话时长{rightPhoneLog[0].duration}秒</span><span>对话{rightPhoneLog[0].phoneLog.phoneLogs.length}轮</span>
                                     </div>
                                     <div className="call-log-info">
-                                        <span>任务类型：AI-求职意向沟通</span>
+                                        <span>任务类型：AI-{rightPhoneLog[0].robotType == 1 ? '意向沟通' : '面试邀约'}</span>
                                     </div>
                                     
                                 </div>
