@@ -16,12 +16,12 @@ import Promise from 'promise-polyfill';
 
 // 全局uri注入
 //window.prefixUri = 'http://yun.51jrq.com/51hr/api/web';
-// window.prefixUri = '/51hr/api/web';     //线上环境
-// window.resumeUrl = '/resumeClient/api';
-// window.robotUri = '/robotagent/api/robot';
-window.prefixUri = '/51hr/api/web'; //测试环境
-window.resumeUrl = '/resumeClient/api'; //请求接口前缀
-window.robotUri = '/robotagent/api/robot'; //请求智能hr
+window.prefixUri = '/51hr/api/web';     //线上环境
+window.resumeUrl = '/resumeClient/api';
+window.robotUri = '/robotagent/api/robot';
+// window.prefixUri = '/51hr/api/web'; //测试环境
+// window.resumeUrl = '/resumeClient/api'; //请求接口前缀
+// window.robotUri = '/robotagent/api/robot'; //请求智能hr
 // css文件
 import 'rc-steps/assets/index.css';
 import 'static/css/normalize.css';

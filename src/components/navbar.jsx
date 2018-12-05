@@ -122,7 +122,7 @@ class NavBarComponents extends Component {
                 {name: '任务报表',path:'/task'},
                 {name: '员工管理',path:'/manager'},
                 {name: '简历搜索',path:'/searchResume'},
-                {name: '智能HR',path:'/aiRecruit'},
+                // {name: '智能HR',path:'/aiRecruit'},
                 {name: '薪酬数据',path:'/salaryQuery'},
             ];
         const menu = (
