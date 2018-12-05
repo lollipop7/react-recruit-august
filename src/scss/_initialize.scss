@@ -64,6 +64,32 @@ a {
         background-color: $page-bg-color;
     }
 }
+.ant-btn-primary {
+    background-color: $btn-primary-bg;
+    border-color: $btn-primary-bg;
+}
+.ant-pagination-item-active {
+    background-color: $btn-primary-bg;
+    border-color: $btn-primary-bg;
+}
 
+.ant-btn:focus, .ant-btn:hover {
+    border-color: $btn-primary-bg;
+}
+.ant-tabs-ink-bar {
+    background-color: $btn-primary-bg;
+}
+.ant-tabs.ant-tabs-card>.ant-tabs-bar .ant-tabs-tab-active {
+    color: $btn-primary-bg;
+}
+.ant-menu-item-selected, .ant-menu-item-selected>a, .ant-menu-item-selected>a:hover {
+    color: $btn-primary-bg;
+}
+.ant-menu-inline .ant-menu-item:after, .ant-menu-vertical .ant-menu-item:after {
+    border-right-color: $theme-color;
+}
+.ant-fullcalendar-month-panel-selected-cell .ant-fullcalendar-value, .ant-fullcalendar-selected-day .ant-fullcalendar-value {
+    background: $theme-color;
+}
 
 

@@ -3,5 +3,6 @@
     "input-border-color": "#d5d5d5",
     "input-hover-border-color": "#555b74",
     "table-header-bg": "#f3f3f3",
-    "link-color": #4967ab;  
+    "link-color": "#4967ab",
+    "btn-primary-bg": "#4967ab"
 }
