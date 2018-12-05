@@ -149,7 +149,7 @@ class NavBarComponents extends Component {
                 <div className="navbar-inner">
                     <div className="logo">
                         <Link to="/" onClick={()=>this.showNprogress('/')}>
-                            <img src={`${prefix}logo.png`} alt="51云招聘"/>
+                            <img src={`${prefix}119-28.png`} alt="51云招聘"/>
                         </Link>
                     </div>
                     <div className="home" style={{backgroundColor: pathname === '/' ? '#9ba0b5' : ''}}>

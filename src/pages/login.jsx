@@ -103,8 +103,8 @@ class LoginPage extends Component {
                         </div>
                     }
                     <div className="login-area">
-                        <img className="logo" src={`${prefix}logo.png`} alt="51招聘云"/>
-                        <p className="desc">先进的互联网金融招聘系统</p>
+                        <img className="logo" src={`${prefix}260-60.png`} alt="AI招聘云"/>
+                        <p className="desc">智能招聘人才管理系统</p>
                         <ul>
                             <ListItem
                                 imgSrc={`${prefix}company-icon.png`}

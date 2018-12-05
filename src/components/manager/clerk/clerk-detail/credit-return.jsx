@@ -1680,7 +1680,7 @@ import * as Actions from 'actions';
                             padding: "10px 0 0 8px"
                         }}>
                             <p className='above-all'>
-                            基于51招聘云大数据及网贷黑名单匹配核查，未发现该被调人信息。
+                            基于AI招聘云大数据及网贷黑名单匹配核查，未发现该被调人信息。
                             </p>
                         </div>
                     </div>
@@ -1695,7 +1695,7 @@ import * as Actions from 'actions';
                             padding: "10px 0 0 8px"
                         }}>
                             <p className='above-all'>
-                            基于51招聘云大数据及职场黑名单匹配核查，未发现该被调人信息。
+                            基于AI招聘云大数据及职场黑名单匹配核查，未发现该被调人信息。
                             </p>
                         </div>
                     </div>
@@ -1710,7 +1710,7 @@ import * as Actions from 'actions';
                             padding: "10px 0 0 8px"
                         }}>
                             <p className='above-all'>
-                            基于51招聘云大数据及工商局信息匹配核查，未发现该被调人企业注册经营信息。
+                            基于AI招聘云大数据及工商局信息匹配核查，未发现该被调人企业注册经营信息。
                             </p>
                         </div>
                     </div>
