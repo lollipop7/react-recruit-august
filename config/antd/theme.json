@@ -1,6 +1,7 @@
 {
-    "primary-color": "#0086c9",
+    "primary-color": "#555b74",
     "input-border-color": "#d5d5d5",
-    "input-hover-border-color": "#0086c9",
-    "table-header-bg": "#f3f3f3"
+    "input-hover-border-color": "#555b74",
+    "table-header-bg": "#f3f3f3",
+    "link-color": #4967ab;  
 }

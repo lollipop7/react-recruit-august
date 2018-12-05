@@ -152,7 +152,7 @@ class NavBarComponents extends Component {
                             <img src={`${prefix}logo.png`} alt="51云招聘"/>
                         </Link>
                     </div>
-                    <div className="home" style={{backgroundColor: pathname === '/' ? '#00699f' : ''}}>
+                    <div className="home" style={{backgroundColor: pathname === '/' ? '#9ba0b5' : ''}}>
                         <Link to='#/' onClick={()=>this.showNprogress('/')}><img src={`${prefix}home.png`} alt="首页"/></Link>
                     </div>
                     <ul className="nav-list">
@@ -164,7 +164,7 @@ class NavBarComponents extends Component {
                                     <li
                                         key={index}
                                         style={{
-                                            backgroundColor: pathname.indexOf(path) !== -1 ? '#00699f' : ''
+                                            backgroundColor: pathname.indexOf(path) !== -1 ? '#9ba0b5' : ''
                                         }}
                                     >   
                                         {path == '/aiRecruit' ?
