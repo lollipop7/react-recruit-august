@@ -85,6 +85,7 @@ class CommLog extends Component {
             return item.callStatus === 2
         })
         rightPhoneLog[0] = currentPhoneLogs[_selectedIndex];
+        rightPhoneLog[0].finishStatus = this.finish(currentPhoneLogs[_selectedIndex].finishStatus);
         return (
             <div className="comm-log">
                 <div className="base-slider-wrap">
@@ -121,7 +122,7 @@ class CommLog extends Component {
                                                         <span>通话时长：{duration}</span>
                                                     </li>
                                                     <li>
-                                                        {finishStatus}
+                                                        {finishStatus} - {item.callResult}
                                                     </li>
                                                     <li>
                                                         {startTime}
@@ -201,7 +202,9 @@ class CommLog extends Component {
                                     <div className="call-log-info">
                                         <span>任务类型：AI-{rightPhoneLog[0].robotType == 1 ? '意向沟通' : '面试邀约'}</span>
                                     </div>
-                                    
+                                    <div className="call-log-respond">
+                                        <span>意向结果：{rightPhoneLog[0].finishStatus}-{rightPhoneLog[0].callResult}</span>
+                                    </div>
                                 </div>
                             </div> 
                         }    

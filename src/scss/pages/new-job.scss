@@ -77,4 +77,19 @@
             }
         }
     }
+
+    .searchBand {
+        width: 200px;
+        height: 30px;
+        font-size: 14px !important;
+        .ant-select-selection--single {
+            height: 30px !important;
+        }
+        .ant-select-selection__rendered {
+            line-height: 30px !important;
+        }
+        .ant-select-arrow:before {
+            content: '\E606';
+        }
+    }
 }

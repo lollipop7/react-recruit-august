@@ -75,7 +75,6 @@ class OrganizeChart extends Component {
 render() {
     // const { organize:{ isLoading } } = this.props;
     const { isLoading } = this.state;
-    console.log(isLoading)
     return (
         <div>
             {isLoading &&

@@ -43,7 +43,6 @@ export default class IntentCommPage extends Component {
               <Menu.Item key="2">删除</Menu.Item>
             </Menu>
         );
-        console.log(this.props);
         return (
             <div>
                 <ProgressComponent/>
@@ -58,10 +57,13 @@ export default class IntentCommPage extends Component {
                         <li className="table-cell ctr-btns">
                             <Button style = {{ width: 118, height: 30 }} 
                                 type="primary"
-                            ><Icon type="plus" />新建沟通</Button>
+                            >
+                                <Icon type="plus" />新建沟通
+                            </Button>
                             <Dropdown overlay={menu}>
                                 <Button style={{ marginLeft: 8, width: 94, height: 30 }}>
-                                    Button <Icon type="down" />
+                                    <span>更多</span>
+                                    <Icon type="down" />
                                 </Button>
                             </Dropdown>
                         </li>

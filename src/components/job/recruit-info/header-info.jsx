@@ -349,7 +349,6 @@ const mapDispatchToProps = dispatch => ({
     getEvaluation: bindActionCreators(Actions.ResumeActions.getEvaluation, dispatch),
     getResumeUrl: bindActionCreators(Actions.ResumeActions.getResumeUrl, dispatch),
     showBackgroundModal: bindActionCreators(Actions.ResumeActions.showBackgroundModal, dispatch),
-    triSingleCall: bindActionCreators(Actions.IntellHRActions.triSingleCall, dispatch),
     showRobotCallModal: bindActionCreators(Actions.IntellHRActions.showRobotCallModal, dispatch),
 })
 

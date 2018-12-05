@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import each from 'lodash/each';
 import pick from 'lodash/pick';
 
-import LeftNavComponent from 'components/intellHR/left-nav';
+import ScrollPageContent from 'components/scroll-page-content';
+import RecommNav from 'components/intellHR/recomm-nav';
+import RightPanel from 'components/intellHR/right';
 import BreadCrumbComponent from 'components/breadcrumb';
 
 export default class IntellHRPage extends Component {
@@ -21,26 +23,28 @@ export default class IntellHRPage extends Component {
             }
         });
         return (
+            <ScrollPageContent>
               <div className="page-content">
                 <BreadCrumbComponent routes={routesCopy}/>
                 <div className="box-border wrap-box">
                     <div className="intell-hr"
                         style={{
-                            right: 1100
+                            right: 1000
                         }}
                     >
-                        <LeftNavComponent location={location}/>
+                        <RecommNav />
                         <div className="intell-right"
                             style={{
-                                left: 1120,
-                                width: 1078,
+                                left: 1020,
+                                width: 980,
                             }}
                         >
-                        {this.props.children}
+                        <RightPanel></RightPanel>
                         </div>
                     </div>
                 </div>
               </div>
+            </ScrollPageContent>
         )
     }
 }

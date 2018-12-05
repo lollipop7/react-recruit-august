@@ -12,7 +12,7 @@ class RobotCallModal extends Component {
   }
 
   async handleRobotCall(){
-    const {username, telephone, triSingleCall, staged, resumeid, hideRobotCallModal} = this.props;
+    const {username, telephone, triSingleCall, staged, resumeid, companyid, hideRobotCallModal} = this.props;
     // "resumeid": "string,简历id",
     // "mobile": "string,手机号",
     // "userName": "string,用户名",
@@ -23,9 +23,9 @@ class RobotCallModal extends Component {
       triSingleCall({
         resumeid : resumeid,
         robot_type: robot_type,
-        mobile: telephone,
+        mobile: '18951317287',
         userName: username,
-        company_id: '11'
+        company_id: companyid
       })
     })
     .then(hideRobotCallModal())

@@ -12,7 +12,7 @@ var proxyTable =  {
       // '/51hr': {target:'http://yun.51jrq.com'},
       // '/robotagent': {target: 'http://hunter.51jrq.com'},
       //'/resumeClient': {target:'http://51jrq-servers2:8088'}
-      // '/web': {target:'http://192.168.101.57:66/hrmanage/api'}
+      // '/web': {target:'http://192.168.101.57:66/hrmanage/api'} 
     }
 
 app.use(compression());

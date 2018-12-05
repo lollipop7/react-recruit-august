@@ -1,5 +1,6 @@
 import React, {Component,PropTypes} from 'react';
 import {Link} from 'react-router';
+import {Dropdown, Menu, Icon, Button} from 'antd';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -104,6 +105,10 @@ class NavBarComponents extends Component {
         });
     }
 
+    handleMenuClick = (value) => {
+        
+    }
+
     render() {
         const {isLoading,keyword} = this.state,
         {location,userInfo} = this.props,
@@ -117,9 +122,28 @@ class NavBarComponents extends Component {
                 {name: '任务报表',path:'/task'},
                 {name: '员工管理',path:'/manager'},
                 {name: '简历搜索',path:'/searchResume'},
-                {name: '智能HR',path:'/intellHR'},
+                {name: '智能HR',path:'/aiRecruit'},
                 {name: '薪酬数据',path:'/salaryQuery'},
             ];
+        const menu = (
+            <Menu 
+                className='inner-menu'
+                onClick={this.handleMenuClick}
+            >
+                <Menu.Item key="1">
+                    <Link
+                        onClick={()=>this.showNprogress('/aiRecruit/intellHR')} to='/aiRecruit/intellHR'
+                    >智能HR
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="2">
+                    <Link
+                        onClick={()=>this.showNprogress('/aiRecruit/intellRecomm')} to='/aiRecruit/intellRecomm'
+                    >智能推荐
+                    </Link>
+                </Menu.Item>
+            </Menu>
+        );
         return (
             <div className="navbar">
                 <div className="navbar-inner">
@@ -136,18 +160,29 @@ class NavBarComponents extends Component {
                             navData.map((item,index)=>{
                                 const {path,name} = item;
                                 return (
+
                                     <li
                                         key={index}
                                         style={{
                                             backgroundColor: pathname.indexOf(path) !== -1 ? '#00699f' : ''
                                         }}
-                                    >
-                                        <Link onClick={()=>this.showNprogress(path)} to={path}>{name}</Link>
+                                    >   
+                                        {path == '/aiRecruit' ?
+                                            (
+                                                <Dropdown overlay={menu}  trigger={['click']}>
+                                                    <Button className="nav-ai">
+                                                        AI招聘<Icon type="down" />
+                                                    </Button>
+                                                </Dropdown>
+                                            )
+                                            :
+                                            <Link onClick={()=>this.showNprogress(path)} to={path}>{name}</Link>
+                                        }
                                     </li>
                                 )
                             })
                         }
-                    </ul>
+                    </ul>                    
                     <div className="user">
                         {!isLoading &&
                             <div className="table">

@@ -560,7 +560,7 @@ const InterviewInvitate = {
     }
 }
 
-// 统计分析
+// 历史候选人
 const StatisAnaly = {
     path: 'statis-analy',
     onEnter: requireAuthHook,
@@ -605,6 +605,37 @@ const IntellHR = {
   }
 }
 
+const IntellRecomm = {
+    path: 'intellRecomm',
+    breadcrumbName: '智能推荐',
+    onEnter: requireAuthHook,
+    onLeave: onLeavePage,
+    getComponent(nextState, cb){
+        require.ensure([], (require) => {
+            cb(null, require('pages/intell-recomm').default)
+        }, 'IntellRecommPage')
+    }
+}
+
+const AIRecruit = {
+    path: 'aiRecruit',
+    breadcrumbName: 'AI招聘',
+    getChildRoutes(partialNextState, cb){
+        require.ensure([], (require) => {
+            cb(null, [
+                IntellHR,
+                IntellRecomm
+            ])
+        })
+    },
+    getComponent(nextState, cb){
+        require.ensure([], (require) => {
+            cb(null, require('pages/ai-recruit').default)
+        }, 'AIRecruitPage')
+    }
+}
+
+
 /*路由配置*/
 const RouteConfig = {
   childRoutes: [ {
@@ -636,7 +667,7 @@ const RouteConfig = {
             ShowResume ,//分享简历页面
             Evaluation,//分享面试评估表页面
             SearchResumePage,//简历搜索页面
-            IntellHR,  //智能HR
+            AIRecruit,  //AI招聘
             CaseView,//背调案例
             ResumeDetail,
             SalaryQuery,

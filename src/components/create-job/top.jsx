@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Button, Tag } from 'antd';
+import { Button, Tag, Tooltip } from 'antd';
 
 import hotJobData from 'data/create-job/hot-job'; 
 
@@ -45,10 +45,12 @@ import * as Actions from 'actions';
                     </div>
                 </li>
                 <li className="recent-job">
-                    <span>最近发布职位：</span>
+                    <Tooltip placement="left" title={'最多显示5条'}>
+                        <span>最近发布职位：</span>
+                    </Tooltip>
                     {
-                        recentJobData.map((item,index) => {
-                            const isLongTag = item.length > 20;
+                        recentJobData.slice(recentJobData.length-6, recentJobData.length-1).map((item,index) => {
+                            const isLongTag = item.positionname.length > 20;
                             return (
                                 <Tag
                                     key = {index}

@@ -3,8 +3,11 @@ import React, {Component} from 'react';
 import {Breadcrumb} from 'antd';
 
 export default class BreadCrumbComponent extends Component {
+    constructor(props){
+        super(props);
+    }
 
-    handleClick() {
+    handleClick(uri='') {
         NProgress.start();
     }
 
@@ -23,7 +26,7 @@ export default class BreadCrumbComponent extends Component {
                     filterRoutes.map( (item,index)=>{
                         return <Breadcrumb.Item className="hover" key={index} 
                                     href={`#${item.path}`} 
-                                    onClick={this.handleClick}>{item.breadcrumbName}
+                                    onClick={()=>this.handleClick(item.path)}>{item.breadcrumbName}
                                </Breadcrumb.Item>
                     })
                 }

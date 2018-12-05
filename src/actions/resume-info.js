@@ -105,6 +105,7 @@ export const getTalentResumeInfo = (data) => (dispatch,getState) => {
     .then(res=>{
         dispatch(LOAD_INFO_DONE);
         dispatch({...LOAD_RESUME_INFO,resumeInfo:res});
+        
     },err=>{
         console.log(err);
     });

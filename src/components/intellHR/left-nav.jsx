@@ -18,15 +18,21 @@ export default class LeftNavComponent extends Component {
 
     render(){
         const navData = [
-            {name: '智能意向沟通', path: '/intellHR'},
-            {name: '自动面试邀约', path: '/intellHR/interview-invitate'},
-            {name: '历史候选人', path: '/intellHR/statis-analy'},
-            {name: '设置智能HR', path: '/intellHR/toset-intellHR'},
+            {name: '智能意向沟通', path: '/aiRecruit/intellHR'},
+            {name: '自动面试邀约', path: '/aiRecruit/intellHR/interview-invitate'},
+            {name: '历史候选人', path: '/aiRecruit/intellHR/statis-analy'},
+            {name: '设置智能HR', path: '/aiRecruit/intellHR/toset-intellHR'},
         ] 
         ,{location} = this.props
         ,{pathname} = location;
         return (
-            <div className="left-nav">
+            <div className="left-nav"
+                style={{
+                    paddingTop: 45,
+                    left: 1100,
+                    width: 100,
+                }}
+            >
                 <ul className="nav-list">
                     {navData.map((item, index) => {
                         const {name, path} = item;

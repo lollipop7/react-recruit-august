@@ -125,7 +125,8 @@ class ResumeInfoPage extends Component {
             { logId } = routeParams,   
             isTalent = this.isInTalentPage(location.pathname),
             isRecruit = this.isInRecruitPage(location.pathname),
-            {resumeid,currentPId,resumeInfo={},evaluationId,lastStageLog,stagesMap} = data,
+            {append = {}, resumeid,currentPId,resumeInfo={},evaluationId,lastStageLog,stagesMap} = data,
+            {companyid} = append,
             {username,email,telephone} = resumeInfo; 
         const staged = find(stagesMap,item=>{
                 return item.iscurrentstage === '1'
@@ -264,6 +265,7 @@ class ResumeInfoPage extends Component {
                                 telephone = {telephone}
                                 resumeid = {resumeid}
                                 staged={staged}
+                                companyid={companyid}
                             />    
                         </div>
                 }

@@ -46,7 +46,7 @@ if (!window.Promise) {
 import { Router , hashHistory } from 'react-router'
 
 // redux
-import { createStore , applyMiddleware } from 'redux';
+import { createStore , applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import reducer from './reducer';
@@ -61,7 +61,10 @@ const store = createStore(
     // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__({
     //     name: 'test'
     // }),
-    applyMiddleware(thunk)
+    compose(
+        applyMiddleware(thunk),
+        window.devToolsExtension ? window.devToolsExtension() : f=>f
+    )
 );
 
 ReactDom.render(

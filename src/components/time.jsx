@@ -16,10 +16,13 @@ export default class TimeComponent extends Component {
 
     disabledStartDate = (startValue) => {
         const {_endValue} = this.state;
+        if(startValue && startValue.valueOf() < Date.now()){
+            return true
+        }
         if (!startValue || !_endValue) {
             return false;
         }
-        return startValue.valueOf() > _endValue.valueOf();
+        return  startValue.valueOf() > _endValue.valueOf() ;
     }
 
     disabledEndDate = (endValue) => {
@@ -64,6 +67,7 @@ export default class TimeComponent extends Component {
     handleEndOpenChange = (open) => {
         this.setState({ _endOpen: open });
     }
+
     componentDidMount(){
         this.setState({    
             _startValue:null,

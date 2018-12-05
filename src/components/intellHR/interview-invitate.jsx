@@ -43,7 +43,6 @@ export default class InterviewInvitatePage extends Component {
               <Menu.Item key="2">删除</Menu.Item>
             </Menu>
         );
-        console.log(this.props);
         return (
             <div>
                 <ProgressComponent/>
